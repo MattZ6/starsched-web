@@ -2,7 +2,7 @@
 export class LocalStorageUtils {
   private APP_STORAGE_KEY_PREFIX = 's'
 
-  private mountStorageKey(key: string) {
+  mountStorageKey(key: string) {
     const mode = import.meta.env.MODE
 
     return `${this.APP_STORAGE_KEY_PREFIX}:${mode}:${key}`

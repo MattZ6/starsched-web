@@ -38,7 +38,7 @@ function BasicPageLogoContainer({
 type BasicPageRootProps = ComponentPropsWithoutRef<'section'>
 
 function BasicPageRoot({ className, ...props }: BasicPageRootProps) {
-  return <section className={cn("flex flex-col items-center gap-8 w-full mx-auto max-w-full sm:max-w-[420px] motion-safe:animate-fade-in-up", className)} {...props} />
+  return <section className={cn("flex flex-col items-center gap-8 w-full mx-auto max-w-full sm:max-w-[420px] motion-safe:animate-in fade-in-0 duration-300", className)} {...props} />
 }
 
 type BasicPageTextProps = ComponentPropsWithoutRef<'p'>

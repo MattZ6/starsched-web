@@ -13,16 +13,35 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { LogoutButton } from "./components/logout-button"
+import { useGetMyProfile } from "@/hooks/services/starsched/use-get-my-profile"
+import { Skeleton } from "@/components/ui/skeleton"
 
 const stringUtils = new StringUtils()
 
 export function ProfileMenu() {
   const { t } = useTranslation('base-layout', { keyPrefix: 'header.profile-menu' })
+  const { data: output } = useGetMyProfile()
 
-  const profile = {
-    name: 'John Doe',
-    email: 'john.doe@acme.com'
+  if (!output) {
+    return (
+      <div className="flex items-center gap-2 rounded-md p-2">
+        <Skeleton className="size-8 shrink-0 rounded-full" />
+
+        <div className="grid flex-1 text-left text-sm leading-tight max-w-40">
+          <Skeleton className="w-[120px] h-6" />
+        </div>
+      </div>
+    )
   }
+
+  const { data: profile, error } = output
+
+  if (error) {
+    // TODO: Pensar no que fazer no caso de falha
+    return <span>Falha</span>
+  }
+
+  const name = stringUtils.contractName(profile.name)
   const avatarFallback = stringUtils.extractFirstLetter(profile.name)
 
   return (
@@ -37,7 +56,7 @@ export function ProfileMenu() {
 
         <div className="grid flex-1 text-left text-sm leading-tight max-w-40">
           <span className="truncate font-semibold">
-            {profile.name}
+            {name}
           </span>
           <span className="truncate text-xs text-muted-foreground">
             {profile.email}

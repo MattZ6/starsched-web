@@ -12,7 +12,7 @@ import { PublicRoutesNavGuard } from './guards/public'
 const SignInPage = lazy(() => import('@/pages/public/sign-in'))
 const SignUpPage = lazy(() => import('@/pages/public/sign-up'))
 const AccountConfirmationPage = lazy(() => import('@/pages/public/account-confirmation'))
-// const ForgotPasswordPage = lazy(() => import('@/pages/guest/ForgotPassword'))
+const ForgotPasswordPage = lazy(() => import('@/pages/public/forgot-password'))
 // const PasswordRecoveryPage = lazy(
 //   () => import('@/pages/guest/PasswordRecovery'),
 // )
@@ -59,8 +59,8 @@ export function Router() {
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/account-confirmation/:id" element={<AccountConfirmationPage />} />
-          {/*
           <Route path="/password/forgot" element={<ForgotPasswordPage />} />
+          {/*
           <Route path="/password/recovery" element={<PasswordRecoveryPage />} />
           <Route path="*" element={<NotFoundPage />} />
            */}

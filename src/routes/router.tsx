@@ -10,7 +10,7 @@ import { PrivateRoutesNavGuard } from './guards/private'
 import { PublicRoutesNavGuard } from './guards/public'
 
 const SignInPage = lazy(() => import('@/pages/public/sign-in'))
-// const SignUpPage = lazy(() => import('@/pages/guest/SignUp'))
+const SignUpPage = lazy(() => import('@/pages/public/sign-up'))
 // const ForgotPasswordPage = lazy(() => import('@/pages/guest/ForgotPassword'))
 // const PasswordRecoveryPage = lazy(
 //   () => import('@/pages/guest/PasswordRecovery'),
@@ -59,7 +59,8 @@ export function Router() {
       <Route element={<PublicRoutesNavGuard />}>
         <Route element={<BaseLayout />}>
           <Route path="/sign-in" element={<SignInPage />} />
-          {/* <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          {/* />
           <Route
             path="/sign-up/finalize"
             element={<AccountCreationConfirmationPage />}

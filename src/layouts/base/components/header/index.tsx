@@ -1,6 +1,6 @@
 import { app } from "@/constants/app"
 
-import { useAuthentication } from "@/hooks/useAuthentication"
+import { useAuthentication } from "@/hooks/use-authentication"
 
 import { NavLinks } from "./components/nav-links";
 import { ProfileMenu } from "./components/profile-menu";

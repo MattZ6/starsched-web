@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
-import { useAuthentication } from '@/hooks/useAuthentication'
+import { useAuthentication } from '@/hooks/use-authentication'
 
 export function PrivateRoutesNavGuard() {
   const { user } = useAuthentication()

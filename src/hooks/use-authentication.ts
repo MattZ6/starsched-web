@@ -1,7 +1,7 @@
-import { useContext } from 'react'
+import { use } from 'react'
 
 import { AuthenticationContext } from '@/contexts/authentication'
 
 export function useAuthentication() {
-  return useContext(AuthenticationContext)
+  return use(AuthenticationContext)
 }

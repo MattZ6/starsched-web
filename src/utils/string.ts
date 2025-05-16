@@ -1,4 +1,16 @@
 export class StringUtils {
+  extractFirstLetter(value: string) {
+    const words = String(value ?? '').trim()
+
+    if (!words.length) {
+      return ''
+    }
+
+    const firstLetter = words.charAt(0).toUpperCase();
+
+    return firstLetter
+  }
+
   extractInitials(value: string) {
     const words = String(value ?? '')
       .trim()

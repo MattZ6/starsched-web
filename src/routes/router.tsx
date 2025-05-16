@@ -1,7 +1,7 @@
 import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-// import { BaseLayout } from '@/layouts/Base'
+import { BaseLayout } from '@/layouts/base'
 // import { MainLayout } from '@/layouts/Main'
 // import { SettingsLayout } from '@/layouts/Settings'
 // import { StaffLayout } from '@/layouts/Staff'
@@ -57,10 +57,9 @@ export function Router() {
       {/* <Route path="/onboarding" element={<CompanyOnboardingPage />} /> */}
 
       <Route element={<PublicRoutesNavGuard />}>
-        <Route path="/sign-in" element={<SignInPage />} />
-        {/* <Route element={<BaseLayout />}>
+        <Route element={<BaseLayout />}>
           <Route path="/sign-in" element={<SignInPage />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
+          {/* <Route path="/sign-up" element={<SignUpPage />} />
           <Route
             path="/sign-up/finalize"
             element={<AccountCreationConfirmationPage />}
@@ -68,8 +67,8 @@ export function Router() {
           <Route path="/password/forgot" element={<ForgotPasswordPage />} />
           <Route path="/password/recovery" element={<PasswordRecoveryPage />} />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Route> */}
+          <Route path="*" element={<NotFoundPage />} /> */}
+        </Route>
       </Route>
     </Routes>
   )

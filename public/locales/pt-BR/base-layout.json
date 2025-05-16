@@ -1,0 +1,24 @@
+{
+  "header": {
+    "nav-links": {
+      "sign-in": {
+        "label": "Entrar"
+      },
+      "sign-up": {
+        "label": "Criar conta"
+      }
+    },
+    "profile-menu": {
+      "my-profile": {
+        "label": "Meu perfil"
+      },
+      "settings": {
+        "label": "Configurações"
+      },
+      "sign-out": {
+        "label": "Sair"
+      }
+    }
+  },
+  "footer": {}
+}

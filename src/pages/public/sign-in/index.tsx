@@ -40,9 +40,9 @@ export default function SignInPage() {
 
         <BasicPageFooter>
           {/* <BasicPageText>
-            <BasicPageLink href="/forgot-password">
-              {t('forgot-password.link.label')}
-            </BasicPageLink>
+            <Link to="/password/forgot" className="text-primary font-semibold">
+              {t('page.forgot-password.link.label')}
+            </Link>
           </BasicPageText> */}
 
           <BasicPageText>

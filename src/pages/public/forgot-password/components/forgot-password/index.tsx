@@ -1,7 +1,8 @@
-import { useTranslation } from 'react-i18next'
-import { Sparkles } from 'lucide-react'
+import { KeyRound } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
-import { SEO } from '@/components/seo'
+import { SEO } from "@/components/seo";
 import {
   BasicPageBody,
   BasicPageDescription,
@@ -12,13 +13,16 @@ import {
   BasicPageText,
   BasicPageTitle,
   BasicPageWrapper,
-} from '@/components/ui/basic-page'
+} from "@/components/ui/basic-page";
 
-import { SignInForm } from './components/form'
-import { Link } from 'react-router-dom'
+import { ForgotPasswordForm } from "./components/form";
 
-export default function SignInPage() {
-  const { t } = useTranslation('sign-in')
+type Props = {
+  onSend: (email: string) => void
+}
+
+export function ForgotPassword({ onSend }: Props) {
+  const { t } = useTranslation('forgot-password', { keyPrefix: 'forgot' })
 
   return (
     <BasicPageWrapper>
@@ -26,7 +30,7 @@ export default function SignInPage() {
         <SEO title={t('meta.title')} />
 
         <BasicPageLogoContainer>
-          <Sparkles />
+          <KeyRound />
         </BasicPageLogoContainer>
 
         <BasicPageHeader>
@@ -35,19 +39,13 @@ export default function SignInPage() {
         </BasicPageHeader>
 
         <BasicPageBody>
-          <SignInForm />
+          <ForgotPasswordForm onSend={onSend} />
         </BasicPageBody>
 
         <BasicPageFooter>
-          {/* <BasicPageText>
-            <Link to="/password/forgot" className="text-primary font-semibold">
-              {t('page.forgot-password.link.label')}
-            </Link>
-          </BasicPageText> */}
-
           <BasicPageText>
-            {t('page.create-account.text')} <Link to="/sign-up" className="text-primary font-semibold">
-              {t('page.create-account.link.label')}
+            <Link to="/sign-in" className="text-primary font-semibold">
+              {t('page.back-to-login.link.label')}
             </Link>
           </BasicPageText>
         </BasicPageFooter>

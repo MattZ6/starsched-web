@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { CircleUserRound, Settings } from "lucide-react"
 
 import { StringUtils } from "@/utils/string"
@@ -16,6 +17,8 @@ import { LogoutButton } from "./components/logout-button"
 const stringUtils = new StringUtils()
 
 export function ProfileMenu() {
+  const { t } = useTranslation('base-layout', { keyPrefix: 'header.profile-menu' })
+
   const profile = {
     name: 'John Doe',
     email: 'john.doe@acme.com'
@@ -45,12 +48,12 @@ export function ProfileMenu() {
       <DropdownMenuContent align="end">
         <DropdownMenuItem disabled>
           <CircleUserRound className="size-4" />
-          Meu perfil
+          {t('my-profile.label')}
         </DropdownMenuItem>
 
         <DropdownMenuItem disabled>
           <Settings className="size-4" />
-          Configurações
+          {t('settings.label')}
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />

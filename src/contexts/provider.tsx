@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { AlertModalProvider } from '@/providers/alert-modal'
+import { ConfirmationModalProvider } from '@/providers/confirmation-modal'
 
 import { AuthenticationProvider } from './authentication'
 import { LanguageProvider } from './language'
@@ -27,6 +28,7 @@ export function Provider(props: Props) {
         </LanguageProvider>
 
         <AlertModalProvider />
+        <ConfirmationModalProvider />
       </>
     </ThemeProvider>
   )

@@ -16,7 +16,17 @@
         "label": "Configurações"
       },
       "sign-out": {
-        "label": "Sair"
+        "label": "Sair",
+        "confirmation-modal": {
+          "title": "Sair da sua conta",
+          "description": "Você realmente deseja sair da sua conta?",
+          "cancel-button": {
+            "label": "Cancelar"
+          },
+          "confirm-button": {
+            "label": "Sair"
+          }
+        }
       }
     }
   },

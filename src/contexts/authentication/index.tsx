@@ -45,6 +45,8 @@ function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
   }
 
   function clearAuthentication() {
+    authenticationStorageUtils.remove()
+
     setUser(null)
   }
 

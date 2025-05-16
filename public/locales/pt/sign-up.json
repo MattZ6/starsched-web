@@ -1,0 +1,78 @@
+{
+  "create-account": {
+    "meta": {
+      "title": "Registre sua clínica"
+    },
+    "page": {
+      "title": "Registre sua clínica",
+      "description": "Junte-se a dezenas de profissionais que já modernizam seus atendimentos com o {{name}}.",
+      "sign-in": {
+        "text": "Já tem uma conta?",
+        "link": {
+          "label": "Entrar"
+        }
+      },
+      "form": {
+        "fields": {
+          "owner_name": {
+            "label": "Nome do responsável",
+            "validation": {
+              "required": "O nome é obrigatório",
+              "minlength": "O nome deve ter pelo menos {{minlength}} caracteres"
+            }
+          },
+          "owner_email": {
+            "label": "Email do responsável",
+            "validation": {
+              "required": "O endereço de email do responsável é obrigatório",
+              "invalid": "Deve ser um endereço de email válido",
+              "already-exists": "Este e-mail já está em uso. Tente fazer login ou use outro e-mail"
+            }
+          },
+          "company_name": {
+            "label": "Nome da clínica",
+            "validation": {
+              "required": "O nome da clínica é obrigatório",
+              "minlength": "O nome da clínica deve ter pelo menos {{minlength}} caracteres"
+            }
+          }
+        },
+        "actions": {
+          "submit": {
+            "label": "Criar conta"
+          }
+        },
+        "errors": {
+          "internal": {
+            "title": "Falha no registro",
+            "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          },
+          "exception": {
+            "title": "Ops! Algo deu errado...",
+            "description": "Detectamos uma falha ao tentar concluir a ação. Tente novamente ou entre em contato com o suporte.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          }
+        }
+      }
+    }
+  },
+  "mail-sent": {
+    "meta": {
+      "title": "Verifique seu email"
+    },
+    "page": {
+      "title": "Verifique seu email",
+      "description": "Nós enviamos um link de verificação para o endereço <b>{{email}}</b>.",
+      "back-to-login": {
+        "link": {
+          "label": "Voltar ao início"
+        }
+      }
+    }
+  }
+}

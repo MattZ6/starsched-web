@@ -9,11 +9,13 @@ import {
   BasicPageHeader,
   BasicPageLogoContainer,
   BasicPageRoot,
+  BasicPageText,
   BasicPageTitle,
   BasicPageWrapper,
 } from '@/components/ui/basic-page'
 
 import { SignInForm } from './components/form'
+import { Link } from 'react-router-dom'
 
 export default function SignInPage() {
   const { t } = useTranslation('sign-in')
@@ -43,11 +45,11 @@ export default function SignInPage() {
             </BasicPageLink>
           </BasicPageText> */}
 
-          {/* <BasicPageText>
-            {t('page.create-account.text')} <BasicPageLink href="/sign-up">
+          <BasicPageText>
+            {t('page.create-account.text')} <Link to="/sign-up" className="text-primary font-semibold">
               {t('page.create-account.link.label')}
-            </BasicPageLink>
-          </BasicPageText> */}
+            </Link>
+          </BasicPageText>
         </BasicPageFooter>
       </BasicPageRoot>
     </BasicPageWrapper>

@@ -17,10 +17,10 @@ i18next
   .use(Backend)
   .init({
     debug: import.meta.env.DEV,
-    supportedLngs: ['en', 'es', 'pt-BR'],
-    fallbackLng: 'pt-BR',
-    defaultNS: 'common',
-    ns: ['common'],
+    supportedLngs: ['pt'],
+    fallbackLng: 'pt',
+    defaultNS: 'base-layout',
+    ns: ['base-layout'],
     detection: {
       lookupLocalStorage: localStorageUtils.mountStorageKey('language'),
       lookupQuerystring: 'lang',

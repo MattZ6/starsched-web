@@ -31,9 +31,10 @@ export function Router() {
   return (
     <Routes>
       <Route element={<PrivateRoutesNavGuard />}>
-        <Route index element={<OnboardingPage />} />
+        <Route element={<BaseLayout />}>
+          <Route index element={<OnboardingPage />} />
 
-        {/* <Route path="/" element={<MainLayout />}>
+          {/* <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
 
           <Route path="/staff" element={<StaffLayout />}>
@@ -50,9 +51,8 @@ export function Router() {
 
           <Route path="*" element={<NotFoundPage />} />
         </Route> */}
+        </Route>
       </Route>
-
-      {/* <Route path="/onboarding" element={<CompanyOnboardingPage />} /> */}
 
       <Route element={<PublicRoutesNavGuard />}>
         <Route element={<BaseLayout />}>

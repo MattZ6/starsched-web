@@ -2,10 +2,9 @@ import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
 
 import { decodeJwt } from 'jose'
 
-// import { StarSchedConstants } from '@/services/StarSchedAPI/constants'
-
+import { starschedEnv } from '@/constants/starsched'
 import { AuthenticationStorageUtils } from '@/utils/authentication-storage'
-// import { EventUtils } from '@/utils/event'
+import { EventUtils } from '@/utils/event'
 
 import type {
   AuthenticationContextTypes,
@@ -22,7 +21,7 @@ function extractClaims(accessToken: string) {
 }
 
 const authenticationStorageUtils = new AuthenticationStorageUtils()
-// const eventUtils = new EventUtils()
+const eventUtils = new EventUtils()
 
 const channel = new BroadcastChannel('app-authentication')
 
@@ -30,26 +29,22 @@ const AuthenticationContext = createContext({} as AuthenticationContextTypes.Con
 
 function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
   const [user, setUser] = useState<AuthenticationContextTypes.User | null>(() => {
-    const auth = authenticationStorageUtils.retrieve()
+    const accessToken = authenticationStorageUtils.retrieveAccessToken()
 
-    if (!auth) {
+    if (!accessToken) {
       return null
     }
 
-    return extractClaims(auth.access_token)
+    return extractClaims(accessToken)
   })
 
-  function saveAuthentication(input: AuthenticationContextTypes.SignInInput) {
-    authenticationStorageUtils.store(input)
-
-    const user = extractClaims(input.access_token)
+  function saveAuthentication({ accessToken }: AuthenticationContextTypes.SignInInput) {
+    const user = extractClaims(accessToken)
 
     setUser(user)
   }
 
   function clearAuthentication() {
-    authenticationStorageUtils.remove()
-
     setUser(null)
   }
 
@@ -88,18 +83,18 @@ function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
     }
   }, [])
 
-  // useEffect(() => {
-  //   eventUtils.subscribe(
-  //     StarSchedConstants.events.SESSION_EXPIRED,
-  //     clearAuthentication,
-  //   )
+  useEffect(() => {
+    eventUtils.subscribe(
+      starschedEnv.sessionExpiredEventName,
+      clearAuthentication,
+    )
 
-  //   return () =>
-  //     eventUtils.unsubscribe(
-  //       StarSchedConstants.events.SESSION_EXPIRED,
-  //       clearAuthentication,
-  //     )
-  // }, [])
+    return () =>
+      eventUtils.unsubscribe(
+        starschedEnv.sessionExpiredEventName,
+        clearAuthentication,
+      )
+  }, [])
 
   return <AuthenticationContext.Provider value={contextValue} {...props} />
 }

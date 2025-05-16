@@ -13,6 +13,8 @@ import {
   BasicPageWrapper,
 } from '@/components/ui/basic-page'
 
+import { SignInForm } from './components/form'
+
 export default function SignInPage() {
   const { t } = useTranslation('sign-in')
 
@@ -31,7 +33,7 @@ export default function SignInPage() {
         </BasicPageHeader>
 
         <BasicPageBody>
-          {/* <SignInForm /> */}
+          <SignInForm />
         </BasicPageBody>
 
         <BasicPageFooter>

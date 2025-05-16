@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "Entrar"
+  },
+  "page": {
+    "title": "Entrar na sua conta",
+    "description": "Bem-vindo(a) de volta!\nFaça login com seu e-mail e senha para gerenciar sua clínica e acompanhar seus atendimentos.",
+    "create-account": {
+      "text": "Ainda não tem uma conta?",
+      "link": {
+        "label": "Criar uma conta agora mesmo"
+      }
+    },
+    "forgot-password": {
+      "link": {
+        "label": "Esqueci minha senha"
+      }
+    },
+    "form": {
+      "fields": {
+        "email": {
+          "label": "Email",
+          "validation": {
+            "required": "O endereço de email é obrigatório",
+            "invalid": "Deve ser um endereço de email válido",
+            "not-found": "Nenhum usuário encontrado com este email e senha"
+          }
+        },
+        "password": {
+          "label": "Senha",
+          "show-password": {
+            "show": "Mostrar",
+            "hide": "Esconder"
+          },
+          "validation": {
+            "required": "A senha é obrigatória"
+          }
+        }
+      },
+      "actions": {
+        "submit": {
+          "label": "Entrar"
+        }
+      },
+      "errors": {
+        "internal": {
+          "title": "Falha na autenticação",
+          "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+          "close-button": {
+            "label": "Entendi"
+          }
+        },
+        "exception": {
+          "title": "Ops! Algo deu errado...",
+          "description": "Detectamos uma falha ao tentar concluir a ação. Tente novamente ou entre em contato com o suporte.",
+          "close-button": {
+            "label": "Entendi"
+          }
+        }
+      }
+    }
+  }
+}

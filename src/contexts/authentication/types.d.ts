@@ -6,7 +6,9 @@ export namespace AuthenticationContextTypes {
     role: 'badass' | 'customer'
   }
 
-  export type SignInInput = unknown;
+  export type SignInInput = {
+    accessToken: string;
+  };
 
   export type Context = {
     user: User | null

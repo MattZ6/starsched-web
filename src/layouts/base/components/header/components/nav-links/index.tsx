@@ -13,10 +13,10 @@ export function NavLinks() {
           {t('sign-in.label')}
         </Link>
       </Button>
-      <Button size="sm" asChild>
-        <Link to="/sign-up">
-          {t('sign-up.label')}
-        </Link>
+      <Button size="sm" disabled>
+        {/* <Link to="/sign-up"> */}
+        {t('sign-up.label')}
+        {/* </Link> */}
       </Button>
     </nav >
   )

@@ -43,6 +43,14 @@ export class AuthenticationStorageUtils {
     }
   }
 
+  retrieveAccessToken() {
+    const accessToken = this.localStorageUtils.retrieve<string>(
+      this.ACCESS_TOKEN_STORAGE_KEY,
+    )
+
+    return accessToken ?? null;
+  }
+
   remove() {
     this.localStorageUtils.remove(this.ACCESS_TOKEN_STORAGE_KEY)
     this.localStorageUtils.remove(this.REFRESH_TOKEN_STORAGE_KEY)

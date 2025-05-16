@@ -1,0 +1,177 @@
+{
+  "loading": {
+    "meta": {
+      "title": "Verificando código"
+    },
+    "page": {
+      "title": "Verificando código...",
+      "description": "Aguarde enquanto verificamos seu código de confirmação."
+    }
+  },
+  "invalid-confirmation-code": {
+    "meta": {
+      "title": "Link de confirmação inválido"
+    },
+    "page": {
+      "title": "Link de confirmação inválido",
+      "description": "Este link de confirmação não é válido. Se precisar, inicie o processo de registro para criar sua conta.",
+      "request-again": {
+        "link": {
+          "label": "Solicitar novamente"
+        }
+      },
+      "back-to-login": {
+        "link": {
+          "label": "Voltar ao início"
+        }
+      }
+    }
+  },
+  "confirmation-code-not-found": {
+    "meta": {
+      "title": "Link de confirmação não encontrado"
+    },
+    "page": {
+      "title": "Link de confirmação não encontrado",
+      "description": "Este link de confirmação já foi utilizado ou não existe mais. Se precisar, inicie o processo de registro para criar sua conta.",
+      "request-again": {
+        "link": {
+          "label": "Solicitar novamente"
+        }
+      },
+      "back-to-login": {
+        "link": {
+          "label": "Voltar ao início"
+        }
+      }
+    }
+  },
+  "confirmation-code-expired": {
+    "meta": {
+      "title": "Link de confirmação expirado"
+    },
+    "page": {
+      "title": "Link de confirmação expirado",
+      "description": "Este link de confirmação expirou. Inicie o processo novamente para concluir a criação da sua conta.",
+      "request-again": {
+        "link": {
+          "label": "Solicitar novamente"
+        }
+      },
+      "back-to-login": {
+        "link": {
+          "label": "Voltar ao início"
+        }
+      }
+    }
+  },
+  "get-account-confirmation-data-error": {
+    "meta": {
+      "title": "Falha ao verificar o link de confirmação"
+    },
+    "page": {
+      "title": "Ops! Algo deu errado...",
+      "description": "Não foi possível verificar o link de confirmação de conta. Tente novamente mais tarde ou entre em contato com o suporte.",
+      "try-again": {
+        "button": {
+          "label": "Tentar novamente"
+        }
+      },
+      "back-to-login": {
+        "link": {
+          "label": "Voltar ao início"
+        }
+      }
+    }
+  },
+  "account-confirmation": {
+    "meta": {
+      "title": "Complete seu cadastro"
+    },
+    "page": {
+      "title": "Complete seu cadastro",
+      "description": "Agora falta pouco!\nDefina uma senha para prosseguir para <b>{{companyName}}</b>.",
+      "back-to-login": {
+        "link": {
+          "label": "Voltar ao início"
+        }
+      },
+      "form": {
+        "fields": {
+          "password": {
+            "label": "Senha",
+            "show-password": {
+              "show": "Mostrar",
+              "hide": "Esconder"
+            },
+            "validation": {
+              "required": "A senha é obrigatória",
+              "minlength": "A senha deve conter pelo menos {{minlength}} caracteres"
+            }
+          },
+          "password_confirmation": {
+            "label": "Confirmação de senha",
+            "show-password": {
+              "show": "Mostrar",
+              "hide": "Esconder"
+            },
+            "validation": {
+              "required": "A confirmação de senha é obrigatória",
+              "minlength": "A confirmação de senha deve conter pelo menos {{minlength}} caracteres",
+              "divergent": "As senhas não condizem"
+            }
+          }
+        },
+        "actions": {
+          "submit": {
+            "label": "Completar cadastro"
+          }
+        },
+        "errors": {
+          "invalid-confirmation-code": {
+            "title": "Link de confirmação inválido",
+            "description": "Este link de confirmação não é mais válido. Se precisar, inicie o processo de registro para criar sua conta.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          },
+          "confirmation-code-not-found": {
+            "title": "Link de confirmação não encontrado",
+            "description": "Este link de confirmação já foi utilizado ou não existe mais. Se precisar, inicie o processo de registro para criar sua conta.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          },
+          "confirmation-code-expired": {
+            "title": "Link de confirmação expirado",
+            "description": "Este link de confirmação expirou. Inicie o processo novamente para concluir a criação da sua conta.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          },
+          "authentication-error": {
+            "title": "Falha na autenticação",
+            "description": "Não se preocupe, sua clínica e sua conta foram criadas normalmente. Você pode seguir para a página de login e realizar sua autenticação.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          },
+          "internal": {
+            "title": "Falha ao completar o cadastro",
+            "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          },
+          "exception": {
+            "title": "Ops! Algo deu errado...",
+            "description": "Detectamos uma falha ao tentar concluir a ação. Tente novamente ou entre em contato com o suporte.",
+            "close-button": {
+              "label": "Entendi"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,7 +11,7 @@ export function useGetCompanySignUpRequest(input: Input) {
 
   return useQuery({
     queryKey: ['get-company-sign-up-request', code],
-    refetchOnWindowFocus: false,
+    staleTime: 1 * 24 * 60 * 60 * 1000, // 👈 1 dia
     queryFn: ({ signal }) => getCompanySignUpRequest({
       id: code,
       abortSignal: signal

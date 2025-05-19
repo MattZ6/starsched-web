@@ -1,9 +1,13 @@
 import { useCallback, useLayoutEffect, useMemo } from "react";
+import { isStarSchedError } from "@/utils/is-starsched-error";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { CircleAlert, CircleOff, SearchX, TimerOff, UserCircle2Icon } from "lucide-react";
+
+import { useFinalizeCompanySignUpRequest } from "@/hooks/services/starsched/use-finalize-company-sign-up-request";
+import { useSignIn } from "@/hooks/services/starsched/use-sign-in";
 
 import { useAlert } from "@/hooks/use-alert";
 
@@ -12,8 +16,7 @@ import { Button } from "@/components/ui/button";
 import { PasswordField } from "@/components/password-field";
 
 import { type CompanySignUpConfirmationFormSchemaInput, getCompanySignUpConfirmationFormSchema } from "./schema";
-import { useFinalizeCompanySignUpRequest } from "@/hooks/services/starsched/use-finalize-company-sign-up-request";
-import { useSignIn } from "@/hooks/services/starsched/use-sign-in";
+
 
 type Props = {
   ownerName: string;
@@ -127,12 +130,14 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
         return;
       }
 
-      const signInOutput = await signInAsync({
+      await signInAsync({
         email: ownerEmail,
         password: password,
       })
 
-      if (signInOutput.error) {
+      navigate('/', { replace: true })
+    } catch (error) {
+      if (isStarSchedError(error)) {
         showAlert({
           icon: CircleAlert,
           title: t('errors.authentication-error.title'),
@@ -143,10 +148,9 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
           }
         })
 
+        return
       }
 
-      navigate('/', { replace: true })
-    } catch {
       showAlert({
         icon: CircleAlert,
         title: t('errors.exception.title'),

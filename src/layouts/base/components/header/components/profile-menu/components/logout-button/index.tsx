@@ -2,7 +2,7 @@ import { useCallback } from "react"
 import { useTranslation } from "react-i18next"
 import { LogOut } from "lucide-react"
 
-import { useConfirmation } from "@/hooks/user-confirmation"
+import { useConfirmation } from "@/hooks/use-confirmation"
 import { useAuthentication } from "@/hooks/use-authentication"
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"

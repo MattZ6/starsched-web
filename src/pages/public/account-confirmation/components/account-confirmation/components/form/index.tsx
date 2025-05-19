@@ -1,5 +1,5 @@
 import { useCallback, useLayoutEffect, useMemo } from "react";
-import { isStarSchedError } from "@/utils/is-starsched-error";
+import type { FinalizeCompanySignUpRequest, SignInWithEmailAndPassword } from "@starsched/sdk";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslation } from "react-i18next";
@@ -8,15 +8,15 @@ import { CircleAlert, CircleOff, SearchX, TimerOff, UserCircle2Icon } from "luci
 
 import { useFinalizeCompanySignUpRequest } from "@/hooks/services/starsched/use-finalize-company-sign-up-request";
 import { useSignIn } from "@/hooks/services/starsched/use-sign-in";
-
 import { useAlert } from "@/hooks/use-alert";
+
+import { isStarSchedError } from "@/utils/is-starsched-error";
 
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { PasswordField } from "@/components/password-field";
 
 import { type CompanySignUpConfirmationFormSchemaInput, getCompanySignUpConfirmationFormSchema } from "./schema";
-
 
 type Props = {
   ownerName: string;
@@ -48,7 +48,7 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
     const { password, password_confirmation } = input
 
     try {
-      const finalizeOutput = await finalizeAsync({
+      await finalizeAsync({
         token: code,
         owner: {
           name: ownerName,
@@ -56,10 +56,10 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
           passwordConfirmation: password_confirmation
         }
       })
-
-      if (finalizeOutput.error) {
-        if (finalizeOutput.error.code === 'validation') {
-          const { validation } = finalizeOutput.error
+    } catch (error) {
+      if (isStarSchedError<FinalizeCompanySignUpRequest.Failure>(error)) {
+        if (error.code === 'validation') {
+          const { validation } = error
 
           if (validation.field === 'password' || validation.field === 'password_confirmation') {
             form.setError(
@@ -90,7 +90,7 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
           }
         }
 
-        if (finalizeOutput.error.code === 'user.account.creation.request.token.not.exists') {
+        if (error.code === 'user.account.creation.request.token.not.exists') {
           showAlert({
             icon: SearchX,
             title: t('errors.confirmation-code-not-found.title'),
@@ -104,7 +104,7 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
           return;
         }
 
-        if (finalizeOutput.error.code === 'user.account.creation.request.token.expired') {
+        if (error.code === 'user.account.creation.request.token.expired') {
           showAlert({
             icon: TimerOff,
             title: t('errors.confirmation-code-expired.title'),
@@ -130,6 +130,17 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
         return;
       }
 
+      showAlert({
+        icon: CircleAlert,
+        title: t('errors.exception.title'),
+        description: t('errors.exception.description'),
+        closeButton: {
+          text: t('errors.exception.close-button.label')
+        }
+      })
+    }
+
+    try {
       await signInAsync({
         email: ownerEmail,
         password: password,
@@ -137,7 +148,7 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
 
       navigate('/', { replace: true })
     } catch (error) {
-      if (isStarSchedError(error)) {
+      if (isStarSchedError<SignInWithEmailAndPassword.Failure>(error)) {
         showAlert({
           icon: CircleAlert,
           title: t('errors.authentication-error.title'),
@@ -148,7 +159,7 @@ export function CompanySignUpConfirmationForm({ ownerName, ownerEmail, code }: P
           }
         })
 
-        return
+        return;
       }
 
       showAlert({

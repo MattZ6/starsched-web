@@ -20,9 +20,9 @@ const stringUtils = new StringUtils()
 
 export function ProfileMenu() {
   const { t } = useTranslation('base-layout', { keyPrefix: 'header.profile-menu' })
-  const { data: output } = useGetMyProfile()
+  const { isLoading, error, data } = useGetMyProfile()
 
-  if (!output) {
+  if (isLoading) {
     return (
       <div className="flex items-center gap-2 rounded-md p-2">
         <Skeleton className="size-8 shrink-0 rounded-full" />
@@ -34,12 +34,12 @@ export function ProfileMenu() {
     )
   }
 
-  const { data: profile, error } = output
-
   if (error) {
     // TODO: Pensar no que fazer no caso de falha
     return <span>Falha</span>
   }
+
+  const profile = data!;
 
   const name = stringUtils.contractName(profile.name)
   const avatarFallback = stringUtils.extractFirstLetter(profile.name)

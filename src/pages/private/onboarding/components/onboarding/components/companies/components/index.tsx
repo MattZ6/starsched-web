@@ -2,7 +2,7 @@ import { useSetAtom } from "jotai";
 
 import type { Company } from "@starsched/sdk";
 
-import { selectedCompany } from "@/atoms/selected-company";
+import { selectedCompanyAtom } from "@/atoms/selected-company";
 
 import { StringUtils } from "@/utils/string";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ const stringUtils = new StringUtils()
 
 export function CompanyLink({ company }: Props) {
   const { t } = useTranslation('common', { keyPrefix: 'company' })
-  const selectCompany = useSetAtom(selectedCompany)
+  const selectCompany = useSetAtom(selectedCompanyAtom)
   const initials = stringUtils.extractFirstLetter(company.name);
 
   const handleSelect = () => selectCompany(company)

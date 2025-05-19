@@ -4,4 +4,4 @@ import type { Company } from "@starsched/sdk";
 
 type SelectedCompanyState = Company | null
 
-export const selectedCompany = atom<SelectedCompanyState>(null)
+export const selectedCompanyAtom = atom<SelectedCompanyState>(null)

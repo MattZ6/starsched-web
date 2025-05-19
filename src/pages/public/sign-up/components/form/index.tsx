@@ -1,12 +1,14 @@
 import { useCallback, useLayoutEffect, useMemo } from "react";
+import type { RequestCompanySignUp } from "@starsched/sdk";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CircleAlert } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { useRequestCompanySignUp } from "@/hooks/services/starsched/use-request-company-sign-up";
-
 import { useAlert } from "@/hooks/use-alert";
+
+import { isStarSchedError } from "@/utils/is-starsched-error";
 
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
@@ -38,7 +40,7 @@ export function SignUpForm({ onSubmit }: Props) {
     const { owner_name, owner_email, company_name } = input
 
     try {
-      const output = await mutateAsync({
+      await mutateAsync({
         owner: {
           name: owner_name,
           email: owner_email,
@@ -48,9 +50,11 @@ export function SignUpForm({ onSubmit }: Props) {
         }
       })
 
-      if (output.error) {
-        if (output.error.code === 'validation') {
-          const { validation } = output.error
+      onSubmit(owner_email);
+    } catch (error) {
+      if (isStarSchedError<RequestCompanySignUp.Failure>(error)) {
+        if (error.code === 'validation') {
+          const { validation } = error
 
           form.setError(
             validation.field,
@@ -66,7 +70,7 @@ export function SignUpForm({ onSubmit }: Props) {
           return;
         }
 
-        if (output.error.code === 'user.email.exists') {
+        if (error.code === 'user.email.exists') {
           form.setError(
             'owner_email',
             { message: t('fields.owner_email.validation.already-exists') },
@@ -88,8 +92,6 @@ export function SignUpForm({ onSubmit }: Props) {
         return;
       }
 
-      onSubmit(owner_email);
-    } catch {
       showAlert({
         icon: CircleAlert,
         title: t('errors.exception.title'),

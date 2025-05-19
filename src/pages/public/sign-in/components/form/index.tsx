@@ -1,4 +1,5 @@
 import { useCallback, useLayoutEffect, useMemo } from "react";
+import { isStarSchedError } from "@/utils/is-starsched-error";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -6,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { CircleAlert } from "lucide-react";
 
 import { useSignIn } from "@/hooks/services/starsched/use-sign-in";
+
+import type { SignInWithEmailAndPassword } from "@starsched/sdk";
 
 import { useAlert } from "@/hooks/use-alert";
 
@@ -36,20 +39,24 @@ export function SignInForm() {
     const { email, password } = input
 
     try {
-      const output = await mutateAsync({ email, password })
+      await mutateAsync({ email, password })
 
-      if (output.error) {
-        if (output.error.code === 'validation') {
+      navigate('/', { replace: true })
+    } catch (error) {
+      if (isStarSchedError<SignInWithEmailAndPassword.Failure>(error)) {
+        if (error.code === 'validation') {
+          const { validation } = error
+
           form.setError(
-            output.error.validation.field,
-            { message: t(`fields.${output.error.validation.field}.validation.${output.error.validation.type}`) },
+            validation.field,
+            { message: t(`fields.${validation.field}.validation.${validation.type}`) },
             { shouldFocus: true }
           )
 
           return;
         }
 
-        if (output.error.code === 'user.not.exists') {
+        if (error.code === 'user.not.exists') {
           form.setError(
             'email',
             { message: t('fields.email.validation.not-found') },
@@ -71,8 +78,6 @@ export function SignInForm() {
         return;
       }
 
-      navigate('/', { replace: true })
-    } catch {
       showAlert({
         icon: CircleAlert,
         title: t('errors.exception.title'),

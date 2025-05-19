@@ -7,10 +7,6 @@ export function useSignIn() {
 
   return useMutation({
     mutationFn: authenticateWithEmailAndPassword,
-    onSuccess: ({ data }) => {
-      if (data) {
-        signIn({ accessToken: data.access_token })
-      }
-    }
+    onSuccess: ({ access_token }) => signIn({ accessToken: access_token })
   })
 }

@@ -8,9 +8,14 @@ type Input = {
 export async function authenticateWithEmailAndPassword(input: Input) {
   const { email, password } = input
 
-  return starschedAPI.authentication.signInWithEmailAndPassword({
+  const { data, error } = await starschedAPI.authentication.signInWithEmailAndPassword({
     email,
     password
   })
 
+  if (error) {
+    throw error
+  }
+
+  return data
 }

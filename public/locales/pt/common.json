@@ -1,0 +1,9 @@
+{
+  "company": {
+    "role": {
+      "owner": "Dono(a)",
+      "manager": "Gerente",
+      "collaborator": "Colaborador(a)"
+    }
+  }
+}

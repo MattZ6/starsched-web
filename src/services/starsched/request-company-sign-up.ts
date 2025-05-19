@@ -8,9 +8,15 @@ type Input = {
 export async function requestCompanySignUp(input: Input) {
   const { owner, company } = input
 
-  return starschedAPI.accounts.requestCompanySignUp({
+  const { data, error } = await starschedAPI.accounts.requestCompanySignUp({
     owner_name: owner.name,
     owner_email: owner.email,
     company_name: company.name
   })
+
+  if (error) {
+    throw error
+  }
+
+  return data
 }

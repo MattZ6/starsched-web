@@ -7,5 +7,11 @@ type Input = {
 export async function getMyProfile(input: Input) {
   const { abortSignal } = input
 
-  return starschedAPI.profiles.getMyProfile({ abortSignal })
+  const { data, error } = await starschedAPI.profiles.getMyProfile({ abortSignal })
+
+  if (error) {
+    throw error
+  }
+
+  return data
 }

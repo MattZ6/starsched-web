@@ -1,7 +1,7 @@
-import { Loader2Icon } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
 import { SEO } from "@/components/seo"
+import { LoadingIndicator } from "@/components/ui/loading-indicator"
 import {
   BasicPageDescription,
   BasicPageHeader,
@@ -20,8 +20,7 @@ export function Loading() {
         <SEO title={t('meta.title')} />
 
         <BasicPageLogoContainer>
-          {/* TODO: Criar um componente de loading com svg */}
-          <Loader2Icon />
+          <LoadingIndicator />
         </BasicPageLogoContainer>
 
         <BasicPageHeader>

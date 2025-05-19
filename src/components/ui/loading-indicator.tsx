@@ -15,7 +15,7 @@ export function LoadingIndicator({ className, ...props }: Props) {
         r="20"
         fill="none"
         strokeWidth="5"
-        stroke-linecap="round"
+        strokeLinecap="round"
         className="stroke-primary animate-spinner-dash"
       />
     </svg>

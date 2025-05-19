@@ -1,0 +1,80 @@
+{
+  "loading": {
+    "meta": {
+      "title": "Carregando suas clínicas"
+    },
+    "page": {
+      "title": "Carregando clínicas...",
+      "description": "Aguarde enquanto carregamos as clínicas que você faz parte."
+    }
+  },
+  "loading-error": {
+    "meta": {
+      "title": "Falha ao carregar as clínicas"
+    },
+    "page": {
+      "title": "Ops! Algo deu errado...",
+      "description": "Não foi possível carregar as clínicas que você faz parte. Tente novamente mais tarde ou entre em contato com o suporte.",
+      "try-again": {
+        "button": {
+          "label": "Tentar novamente"
+        }
+      }
+    }
+  },
+  "select-company": {
+    "meta": {
+      "title": "Selecione uma clínica"
+    },
+    "page": {
+      "title": "Selecione uma clínica",
+      "description_zero": "Você não faz parte de nenhuma clínica no momento. Se precisar, você pode registrar sua própria clínica.",
+      "description_one": "Para prosseguir selecione uma das clínicas que você faz parte.",
+      "description_two": "Para prosseguir selecione uma das clínicas que você faz parte.",
+      "description_few": "Para prosseguir selecione uma das clínicas que você faz parte.",
+      "description_many": "Para prosseguir selecione uma das clínicas que você faz parte.",
+      "description_other": "Para prosseguir selecione uma das clínicas que você faz parte.",
+      "create-company": {
+        "button": {
+          "label": "Registrar uma nova clínica"
+        },
+        "modal": {
+          "title": "Registrar clínica",
+          "description": "Comece a gerenciar os horários, atendimentos e faturamento da sua clínica."
+        },
+        "form": {
+          "fields": {
+            "name": {
+              "label": "Nome da clínica",
+              "validation": {
+                "required": "O nome da clínica é obrigatório",
+                "minlength": "O nome da clínica deve ter pelo menos {{minlength}} caracteres"
+              }
+            }
+          },
+          "actions": {
+            "submit": {
+              "label": "Registrar"
+            }
+          },
+          "errors": {
+            "internal": {
+              "title": "Falha ao registrar a clínica",
+              "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+              "close-button": {
+                "label": "Entendi"
+              }
+            },
+            "exception": {
+              "title": "Ops! Algo deu errado...",
+              "description": "Detectamos uma falha ao tentar concluir a ação. Tente novamente ou entre em contato com o suporte.",
+              "close-button": {
+                "label": "Entendi"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ import { CircleAlert } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { CreateCompany } from "@starsched/sdk";
 
-import { selectedCompany } from "@/atoms/selected-company";
+import { selectedCompanyAtom } from "@/atoms/selected-company";
 
 import { useAlert } from "@/hooks/use-alert";
 
@@ -24,7 +24,7 @@ export function CreateCompanyForm() {
   const { t } = useTranslation('onboarding', { keyPrefix: 'select-company.page.create-company.form' });
   const { showAlert } = useAlert()
   const { mutateAsync } = useCreateCompany()
-  const selectCompany = useSetAtom(selectedCompany)
+  const selectCompany = useSetAtom(selectedCompanyAtom)
 
   const signUpFormSchema = useMemo(() => getCreateCompanySchema(t), [t])
 

@@ -8,8 +8,14 @@ type Input = {
 export async function getCompanySignUpRequest(input: Input) {
   const { id, abortSignal } = input
 
-  return starschedAPI.accounts.getCompanySignUpRequest(
+  const { data, error } = await starschedAPI.accounts.getCompanySignUpRequest(
     { token: id },
     { abortSignal },
   )
+
+  if (error) {
+    throw error
+  }
+
+  return data
 }

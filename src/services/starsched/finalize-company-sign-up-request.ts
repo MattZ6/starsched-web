@@ -12,7 +12,7 @@ type Input = {
 export async function finalizeCompanySignUpRequest(input: Input) {
   const { token, owner } = input
 
-  return starschedAPI.accounts.finalizeCompanySignUpRequest(
+  const { data, error } = await starschedAPI.accounts.finalizeCompanySignUpRequest(
     {
       token,
       owner_name: owner.name,
@@ -20,4 +20,10 @@ export async function finalizeCompanySignUpRequest(input: Input) {
       password_confirmation: owner.passwordConfirmation
     }
   )
+
+  if (error) {
+    throw error
+  }
+
+  return data
 }

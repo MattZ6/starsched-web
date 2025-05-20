@@ -72,7 +72,7 @@ export function Failure({ error, onTryAgain }: Props) {
       <BasicPageRoot>
         <BasicPageBody className="items-center">
           <BasicPageLogoContainer>
-            <AlertCircle />
+            <Bug />
           </BasicPageLogoContainer>
 
           <BasicPageHeader>

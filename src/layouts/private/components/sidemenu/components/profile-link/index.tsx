@@ -23,7 +23,7 @@ export function ProfileLink() {
 
   return (
     <SidebarMenu>
-      <SidebarMenuButton size="lg">
+      <SidebarMenuButton size="lg" disabled>
         <Avatar>
           <AvatarImage />
           <AvatarFallback>{avatarFallback}</AvatarFallback>

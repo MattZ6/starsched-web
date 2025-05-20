@@ -5,5 +5,33 @@
       "manager": "Gerente",
       "collaborator": "Colaborador(a)"
     }
+  },
+  "private-nav-guard": {
+    "profile-check": {
+      "loading": {
+        "title": "Carregando perfil",
+        "description": "Aguarde alguns instantens enquanto carregamos seu perfil."
+      },
+      "failure": {
+        "try-again": {
+          "button": {
+            "label": "Tentar novamente"
+          }
+        },
+        "sign-out": {
+          "button": {
+            "label": "Sair"
+          }
+        },
+        "internal": {
+          "title": "Falha ao carregar seu perfil",
+          "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente."
+        },
+        "exception": {
+          "title": "Ops! Algo deu errado...",
+          "description": "Não foi possível carregar seu perfil. Tente novamente mais tarde ou entre em contato com o suporte."
+        }
+      }
+    }
   }
 }

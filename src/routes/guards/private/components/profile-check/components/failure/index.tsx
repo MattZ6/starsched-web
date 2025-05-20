@@ -56,7 +56,7 @@ export function Failure({ error, onTryAgain }: Props) {
                 <Button type="button" onClick={onTryAgain}>
                   {t('try-again.button.label')}
                 </Button>
-                <Button type="button" variant="ghost">
+                <Button type="button" variant="ghost" onClick={signOut}>
                   {t('sign-out.button.label')}
                 </Button>
               </BasicPageBody>
@@ -84,7 +84,7 @@ export function Failure({ error, onTryAgain }: Props) {
             <Button type="button" onClick={onTryAgain}>
               {t('try-again.button.label')}
             </Button>
-            <Button type="button" variant="ghost">
+            <Button type="button" variant="ghost" onClick={signOut}>
               {t('sign-out.button.label')}
             </Button>
           </BasicPageBody>

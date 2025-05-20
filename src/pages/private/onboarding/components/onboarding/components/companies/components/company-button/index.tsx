@@ -1,11 +1,10 @@
-import { useSetAtom } from "jotai";
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import type { Company } from "@starsched/sdk";
 
-import { selectedCompanyAtom } from "@/atoms/selected-company";
-
 import { StringUtils } from "@/utils/string";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   company: Company;
@@ -13,12 +12,14 @@ type Props = {
 
 const stringUtils = new StringUtils()
 
-export function CompanyLink({ company }: Props) {
+export function CompanyButton({ company }: Props) {
   const { t } = useTranslation('common', { keyPrefix: 'company' })
-  const selectCompany = useSetAtom(selectedCompanyAtom)
+  const navigate = useNavigate()
   const initials = stringUtils.extractFirstLetter(company.name);
 
-  const handleSelect = () => selectCompany(company)
+  const handleSelect = useCallback(() => {
+    navigate(`/${company.slug}`, { replace: true })
+  }, [company, navigate])
 
   return (
     <button

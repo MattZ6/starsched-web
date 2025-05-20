@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { Settings } from "lucide-react"
 
 import {
@@ -24,11 +23,9 @@ export function BottomNav() {
         <SidebarMenu>
           {LINKS.map((link) => (
             <SidebarMenuItem key={link.title}>
-              <SidebarMenuButton asChild>
-                <Link to={link.url}>
-                  <link.Icon />
-                  <span>{link.title}</span>
-                </Link>
+              <SidebarMenuButton disabled>
+                <link.Icon />
+                <span>{link.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}

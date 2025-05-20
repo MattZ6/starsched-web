@@ -93,19 +93,3 @@ export function Failure({ error, onTryAgain }: Props) {
     </BasicPageWrapper>
   )
 }
-
-
-//   return <BasicPageWrapper>
-//     <BasicPageRoot>
-//       <BasicPageBody >
-//         <BasicPageLogoContainer>
-
-//         </BasicPageLogoContainer>
-
-//         <BasicPageHeader>
-//           <BasicPageTitle>Falha</BasicPageTitle>
-//           <BasicPageDescription>Falha ao carregar o seu perfil</BasicPageDescription>
-//         </BasicPageHeader>
-//       </BasicPageBody>
-//     </BasicPageRoot>
-//   </BasicPageWrapper>

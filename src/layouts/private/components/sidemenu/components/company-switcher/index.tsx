@@ -1,8 +1,10 @@
+import { useTranslation } from "react-i18next"
 import { Plus } from "lucide-react"
 
 import { useGetMyCompanies } from "@/hooks/services/starsched/use-get-my-companies"
 import { useIsMobile } from "@/hooks/use-mobile"
 
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,18 +21,22 @@ import { CurrentCompany } from "./components/current-company"
 import { CompanyButton } from "./components/company-button"
 
 export function CompanySwitcher() {
+  const { t } = useTranslation('company-layout', { keyPrefix: 'sidemenu.company-switcher' })
   const isMobile = useIsMobile()
-  const { isLoading, error, data } = useGetMyCompanies()
+  const { data: companies } = useGetMyCompanies()
 
-  if (isLoading) {
-    return <span>carregando...</span>;
+  if (!companies) {
+    return (
+      <div className="flex items-center gap-2 rounded-md p-2">
+        <Skeleton className="flex aspect-square size-8 rounded-md" />
+
+        <div className="flex-1 flex flex-col gap-2 text-left">
+          <Skeleton className="w-[100%] h-3" />
+          <Skeleton className="w-[80%] h-3" />
+        </div>
+      </div>
+    )
   }
-
-  if (error) {
-    return <span>falha</span>
-  }
-
-  const companies = data!
 
   return (
     <SidebarMenu>
@@ -45,8 +51,7 @@ export function CompanySwitcher() {
             sideOffset={4}
           >
             <DropdownMenuLabel className="text-xs text-muted-foreground">
-              {/* {t('company-membership.select.label')} */}
-              Clínica
+              {t('label')}
             </DropdownMenuLabel>
 
             {companies.map((company) => (
@@ -60,8 +65,7 @@ export function CompanySwitcher() {
                 <Plus className="size-4" />
               </div>
               <span className="font-medium text-muted-foreground">
-                Nova clínica
-                {/* {t('company-membership.new-company.button.label')} */}
+                {t('add-company-button.label')}
               </span>
             </DropdownMenuItem>
           </DropdownMenuContent>

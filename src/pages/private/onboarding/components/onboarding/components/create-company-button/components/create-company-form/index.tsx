@@ -1,12 +1,10 @@
 import { useCallback, useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { useSetAtom } from "jotai";
 import { useTranslation } from "react-i18next";
 import { CircleAlert } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
 import type { CreateCompany } from "@starsched/sdk";
-
-import { selectedCompanyAtom } from "@/atoms/selected-company";
 
 import { useAlert } from "@/hooks/use-alert";
 
@@ -24,7 +22,7 @@ export function CreateCompanyForm() {
   const { t } = useTranslation('onboarding', { keyPrefix: 'select-company.page.create-company.form' });
   const { showAlert } = useAlert()
   const { mutateAsync } = useCreateCompany()
-  const selectCompany = useSetAtom(selectedCompanyAtom)
+  const navigate = useNavigate()
 
   const signUpFormSchema = useMemo(() => getCreateCompanySchema(t), [t])
 
@@ -39,11 +37,9 @@ export function CreateCompanyForm() {
     const { name } = input
 
     try {
-      const output = await mutateAsync({ name })
+      const company = await mutateAsync({ name })
 
-      selectCompany(output)
-
-      // TODO: Pensar em fazer o redirect ou criar um nav guard pra isso
+      navigate(`/${company.slug}`, { replace: true })
     } catch (error) {
       if (isStarSchedError<CreateCompany.Failure>(error)) {
         if (error.code === 'validation') {
@@ -84,7 +80,7 @@ export function CreateCompanyForm() {
         }
       })
     }
-  }, [form, mutateAsync, selectCompany, showAlert, t])
+  }, [form, mutateAsync, navigate, showAlert, t])
 
   return (
     <Form {...form}>

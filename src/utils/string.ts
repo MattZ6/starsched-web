@@ -1,5 +1,5 @@
 export class StringUtils {
-  extractFirstLetter(value: string) {
+  getAvatarFallback(value?: string) {
     const words = String(value ?? '').trim()
 
     if (!words.length) {

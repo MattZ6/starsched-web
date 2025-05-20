@@ -56,7 +56,7 @@ export function Failure({ error, onTryAgain }: Props) {
                 <Button type="button" onClick={onTryAgain}>
                   {t('try-again.button.label')}
                 </Button>
-                <Button type="button" variant="ghost">
+                <Button type="button" variant="ghost" onClick={signOut}>
                   {t('sign-out.button.label')}
                 </Button>
               </BasicPageBody>
@@ -72,7 +72,7 @@ export function Failure({ error, onTryAgain }: Props) {
       <BasicPageRoot>
         <BasicPageBody className="items-center">
           <BasicPageLogoContainer>
-            <AlertCircle />
+            <Bug />
           </BasicPageLogoContainer>
 
           <BasicPageHeader>
@@ -84,7 +84,7 @@ export function Failure({ error, onTryAgain }: Props) {
             <Button type="button" onClick={onTryAgain}>
               {t('try-again.button.label')}
             </Button>
-            <Button type="button" variant="ghost">
+            <Button type="button" variant="ghost" onClick={signOut}>
               {t('sign-out.button.label')}
             </Button>
           </BasicPageBody>
@@ -93,19 +93,3 @@ export function Failure({ error, onTryAgain }: Props) {
     </BasicPageWrapper>
   )
 }
-
-
-//   return <BasicPageWrapper>
-//     <BasicPageRoot>
-//       <BasicPageBody >
-//         <BasicPageLogoContainer>
-
-//         </BasicPageLogoContainer>
-
-//         <BasicPageHeader>
-//           <BasicPageTitle>Falha</BasicPageTitle>
-//           <BasicPageDescription>Falha ao carregar o seu perfil</BasicPageDescription>
-//         </BasicPageHeader>
-//       </BasicPageBody>
-//     </BasicPageRoot>
-//   </BasicPageWrapper>

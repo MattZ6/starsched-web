@@ -42,24 +42,22 @@ export function Failure({ error, onTryAgain }: Props) {
       return (
         <BasicPageWrapper>
           <BasicPageRoot>
-            <BasicPageBody className="items-center">
-              <BasicPageLogoContainer>
-                <AlertCircle />
-              </BasicPageLogoContainer>
+            <BasicPageLogoContainer>
+              <AlertCircle />
+            </BasicPageLogoContainer>
 
-              <BasicPageHeader>
-                <BasicPageTitle>{t('internal.title')}</BasicPageTitle>
-                <BasicPageDescription>{t('internal.description')}</BasicPageDescription>
-              </BasicPageHeader>
+            <BasicPageHeader>
+              <BasicPageTitle>{t('internal.title')}</BasicPageTitle>
+              <BasicPageDescription>{t('internal.description')}</BasicPageDescription>
+            </BasicPageHeader>
 
-              <BasicPageBody>
-                <Button type="button" onClick={onTryAgain}>
-                  {t('try-again.button.label')}
-                </Button>
-                <Button type="button" variant="ghost" onClick={signOut}>
-                  {t('sign-out.button.label')}
-                </Button>
-              </BasicPageBody>
+            <BasicPageBody>
+              <Button type="button" onClick={onTryAgain}>
+                {t('try-again.button.label')}
+              </Button>
+              <Button type="button" variant="ghost" onClick={signOut}>
+                {t('sign-out.button.label')}
+              </Button>
             </BasicPageBody>
           </BasicPageRoot>
         </BasicPageWrapper>
@@ -70,24 +68,22 @@ export function Failure({ error, onTryAgain }: Props) {
   return (
     <BasicPageWrapper>
       <BasicPageRoot>
-        <BasicPageBody className="items-center">
-          <BasicPageLogoContainer>
-            <Bug />
-          </BasicPageLogoContainer>
+        <BasicPageLogoContainer>
+          <Bug />
+        </BasicPageLogoContainer>
 
-          <BasicPageHeader>
-            <BasicPageTitle>{t('exception.title')}</BasicPageTitle>
-            <BasicPageDescription>{t('exception.description')}</BasicPageDescription>
-          </BasicPageHeader>
+        <BasicPageHeader>
+          <BasicPageTitle>{t('exception.title')}</BasicPageTitle>
+          <BasicPageDescription>{t('exception.description')}</BasicPageDescription>
+        </BasicPageHeader>
 
-          <BasicPageBody>
-            <Button type="button" onClick={onTryAgain}>
-              {t('try-again.button.label')}
-            </Button>
-            <Button type="button" variant="ghost" onClick={signOut}>
-              {t('sign-out.button.label')}
-            </Button>
-          </BasicPageBody>
+        <BasicPageBody>
+          <Button type="button" onClick={onTryAgain}>
+            {t('try-again.button.label')}
+          </Button>
+          <Button type="button" variant="ghost" onClick={signOut}>
+            {t('sign-out.button.label')}
+          </Button>
         </BasicPageBody>
       </BasicPageRoot>
     </BasicPageWrapper>

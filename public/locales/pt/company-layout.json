@@ -1,0 +1,10 @@
+{
+  "sidemenu": {
+    "company-switcher": {
+      "label": "Clínicas",
+      "add-company-button": {
+        "label": "Nova clínica"
+      }
+    }
+  }
+}

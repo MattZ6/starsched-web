@@ -2,12 +2,14 @@ import { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import { BaseLayout } from '@/layouts/base'
-// import { MainLayout } from '@/layouts/Main'
+import { PrivateLayout } from '@/layouts/private'
 // import { SettingsLayout } from '@/layouts/Settings'
 // import { StaffLayout } from '@/layouts/Staff'
 
 import { PrivateRoutesNavGuard } from './guards/private'
 import { PublicRoutesNavGuard } from './guards/public'
+import { CompanyRoutesNavGuard } from './guards/company'
+import { OnboardingRoutesNavGuard } from './guards/onboarding'
 
 const SignInPage = lazy(() => import('@/pages/public/sign-in'))
 const SignUpPage = lazy(() => import('@/pages/public/sign-up'))
@@ -19,7 +21,7 @@ const ForgotPasswordPage = lazy(() => import('@/pages/public/forgot-password'))
 
 const OnboardingPage = lazy(() => import('@/pages/private/onboarding'))
 
-// const HomePage = lazy(() => import('@/pages/Home'))
+const HomePage = lazy(() => import('@/pages/private/home'))
 // const CompanyMembers = lazy(() => import('@/pages/CompanyMembers'))
 // const CompanyInvitations = lazy(() => import('@/pages/CompanyInvitations'))
 // const PatientsPage = lazy(() => import('@/pages/Patients'))
@@ -31,26 +33,34 @@ export function Router() {
   return (
     <Routes>
       <Route element={<PrivateRoutesNavGuard />}>
-        <Route element={<BaseLayout />}>
-          <Route index element={<OnboardingPage />} />
+        <Route path="/:companySlug" element={<CompanyRoutesNavGuard />}>
+          <Route element={<PrivateLayout />}>
+            <Route index element={<HomePage />} />
+          </Route>
+        </Route>
+
+        <Route element={<OnboardingRoutesNavGuard />}>
+          <Route element={<BaseLayout />}>
+            <Route index element={<OnboardingPage />} />
+          </Route>
 
           {/* <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
 
           <Route path="/staff" element={<StaffLayout />}>
-            <Route index element={<CompanyMembers />} />
-            <Route path="invites" element={<CompanyInvitations />} />
+          <Route index element={<CompanyMembers />} />
+          <Route path="invites" element={<CompanyInvitations />} />
           </Route>
 
           <Route path="/patients" element={<PatientsPage />} />
           <Route path="/patients/:id" element={<PatientPage />} />
 
           <Route path="/settings" element={<SettingsLayout />}>
-            <Route index element={<AppearancePage />} />
+          <Route index element={<AppearancePage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />
-        </Route> */}
+          </Route> */}
         </Route>
       </Route>
 

@@ -10,7 +10,7 @@ export function Header() {
   const isAuthenticated = !!user;
 
   return (
-    <header className="border-b border-base-6 sticky top-0 bg-background">
+    <header className="border-b border-base-6 sticky top-0 z-[1] backdrop-blur-md">
       <div className="flex flex-row gap-4 items-center px-6 max-w-7xl mx-auto min-h-16">
         <div className="flex items-center gap-1">
           <span className="font-bold text-xl text-foreground">

@@ -19,7 +19,7 @@ export function ProfileLink() {
   }
 
   const profile = data!;
-  const avatarFallback = stringUtils.extractFirstLetter(profile.name)
+  const avatarFallback = stringUtils.getAvatarFallback(profile.name)
 
   return (
     <SidebarMenu>

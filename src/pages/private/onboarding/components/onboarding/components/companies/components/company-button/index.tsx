@@ -15,7 +15,7 @@ const stringUtils = new StringUtils()
 export function CompanyButton({ company }: Props) {
   const { t } = useTranslation('common', { keyPrefix: 'company' })
   const navigate = useNavigate()
-  const initials = stringUtils.extractFirstLetter(company.name);
+  const initials = stringUtils.getAvatarFallback(company.name);
 
   const handleSelect = useCallback(() => {
     navigate(`/${company.slug}`, { replace: true })

@@ -42,7 +42,7 @@ export function ProfileMenu() {
   const profile = data!;
 
   const name = stringUtils.contractName(profile.name)
-  const avatarFallback = stringUtils.extractFirstLetter(profile.name)
+  const avatarFallback = stringUtils.getAvatarFallback(profile.name)
 
   return (
     <DropdownMenu>

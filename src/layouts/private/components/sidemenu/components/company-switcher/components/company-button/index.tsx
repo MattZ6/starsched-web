@@ -16,7 +16,7 @@ type Props = {
 const stringUtils = new StringUtils()
 
 export function CompanyButton({ company }: Props) {
-  const avatarFallback = stringUtils.extractFirstLetter(company.name);
+  const avatarFallback = stringUtils.getAvatarFallback(company.name);
   const setCompanySlug = useSetAtom(selectedCompanySlugAtom)
   const location = useLocation()
   const navigate = useNavigate()

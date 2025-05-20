@@ -13,7 +13,7 @@ export function CurrentCompany() {
   const { t } = useTranslation('common', { keyPrefix: 'company' })
   const selectedCompany = useSelectedCompany()
 
-  const avatarFallback = stringUtils.extractFirstLetter(selectedCompany?.name)
+  const avatarFallback = stringUtils.getAvatarFallback(selectedCompany?.name)
 
   return (
     <DropdownMenuTrigger asChild>

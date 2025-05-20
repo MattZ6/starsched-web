@@ -20,7 +20,7 @@
         },
         "sign-out": {
           "button": {
-            "label": "Sair"
+            "label": "Sair da minha conta"
           }
         },
         "internal": {
@@ -31,6 +31,32 @@
           "title": "Ops! Algo deu errado...",
           "description": "Não foi possível carregar seu perfil. Tente novamente mais tarde ou entre em contato com o suporte."
         }
+      }
+    }
+  },
+  "company-nav-guard": {
+    "initializing": {
+      "title": "Inicializando",
+      "description": "Aguarde alguns instantens enquanto preparamos tudo para você."
+    },
+    "failure": {
+      "try-again": {
+        "button": {
+          "label": "Tentar novamente"
+        }
+      },
+      "sign-out": {
+        "button": {
+          "label": "Sair da minha conta"
+        }
+      },
+      "internal": {
+        "title": "Falha ao carregar as clínicas",
+        "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente."
+      },
+      "exception": {
+        "title": "Ops! Algo deu errado...",
+        "description": "Não foi possível carregar as clínicas que você faz parte. Tente novamente mais tarde ou entre em contato com o suporte."
       }
     }
   }

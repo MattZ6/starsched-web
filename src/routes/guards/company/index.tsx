@@ -5,8 +5,9 @@ import { Navigate, Outlet, useParams } from 'react-router-dom'
 import { selectedCompanySlugAtom } from '@/atoms/selected-company-slug'
 
 import { useGetMyCompanies } from '@/hooks/services/starsched/use-get-my-companies'
-import { BasicPageBody, BasicPageDescription, BasicPageHeader, BasicPageLogoContainer, BasicPageRoot, BasicPageTitle, BasicPageWrapper } from '@/components/ui/basic-page'
-import { LoadingIndicator } from '@/components/ui/loading-indicator'
+
+import { Initializing } from './components/initializing'
+import { Failure } from './components/failure'
 
 type Intialization = 'pending' | 'can_view' | 'cannot_view'
 
@@ -15,7 +16,7 @@ type Params = {
 }
 
 export function CompanyRoutesNavGuard() {
-  const { isLoading, error, data } = useGetMyCompanies()
+  const { error, refetch, data } = useGetMyCompanies()
   const setSelectedCompanySlug = useSetAtom(selectedCompanySlugAtom)
   const { companySlug } = useParams<Params>()
   const [initialization, setInitialization] = useState<Intialization>('pending')
@@ -42,31 +43,12 @@ export function CompanyRoutesNavGuard() {
     check()
   }, [companySlug, data, setSelectedCompanySlug])
 
-  if (isLoading) {
-    return <BasicPageWrapper>
-      <BasicPageRoot>
-        <BasicPageBody >
-          <BasicPageLogoContainer>
-            <LoadingIndicator />
-          </BasicPageLogoContainer>
-
-          <BasicPageHeader>
-            <BasicPageTitle>Carregando clínicas...</BasicPageTitle>
-            <BasicPageDescription>Aguarde alguns instantes</BasicPageDescription>
-          </BasicPageHeader>
-        </BasicPageBody>
-      </BasicPageRoot>
-    </BasicPageWrapper>
-  }
-
   if (error) {
-    // TODO: Implementar
-    return <span>deu ruim... tentar novamente</span>
+    return <Failure error={error} onTryAgain={refetch} />
   }
 
   if (initialization === 'pending') {
-    // TODO: Implementar
-    return <span>inicializando...</span>
+    return <Initializing />
   }
 
   if (initialization === 'cannot_view') {

@@ -1,6 +1,6 @@
 import { AlertCircle, Bug } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import type { GetMyProfile } from '@starsched/sdk'
+import type { GetMyCompanies } from '@starsched/sdk'
 
 import { useAuthentication } from '@/hooks/use-authentication'
 
@@ -23,10 +23,10 @@ type Props = {
 }
 
 export function Failure({ error, onTryAgain }: Props) {
-  const { t } = useTranslation('common', { keyPrefix: 'private-nav-guard.profile-check.failure' })
+  const { t } = useTranslation('common', { keyPrefix: 'company-nav-guard.failure' })
   const { signOut } = useAuthentication()
 
-  if (isStarSchedError<GetMyProfile.Failure>(error)) {
+  if (isStarSchedError<GetMyCompanies.Failure>(error)) {
     if (
       error.code === 'user.not.exists' ||
       error.code === 'token.expired' ||

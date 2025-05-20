@@ -1,8 +1,11 @@
 import { useTranslation } from "react-i18next"
 import { CircleUserRound, Settings } from "lucide-react"
 
+import { useGetMyProfile } from "@/hooks/services/starsched/use-get-my-profile"
+
 import { StringUtils } from "@/utils/string"
 
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,16 +16,14 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 import { LogoutButton } from "./components/logout-button"
-import { useGetMyProfile } from "@/hooks/services/starsched/use-get-my-profile"
-import { Skeleton } from "@/components/ui/skeleton"
 
 const stringUtils = new StringUtils()
 
 export function ProfileMenu() {
   const { t } = useTranslation('base-layout', { keyPrefix: 'header.profile-menu' })
-  const { isLoading, error, data } = useGetMyProfile()
+  const { data: profile } = useGetMyProfile()
 
-  if (isLoading) {
+  if (!profile) {
     return (
       <div className="flex items-center gap-2 rounded-md p-2">
         <Skeleton className="size-8 shrink-0 rounded-full" />
@@ -33,13 +34,6 @@ export function ProfileMenu() {
       </div>
     )
   }
-
-  if (error) {
-    // TODO: Pensar no que fazer no caso de falha
-    return <span>Falha</span>
-  }
-
-  const profile = data!;
 
   const name = stringUtils.contractName(profile.name)
   const avatarFallback = stringUtils.getAvatarFallback(profile.name)

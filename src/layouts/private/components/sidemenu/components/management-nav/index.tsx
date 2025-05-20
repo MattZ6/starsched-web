@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { ContactRound, Users } from "lucide-react"
 
 import {
@@ -29,11 +28,9 @@ export function ManagementNav() {
       <SidebarMenu>
         {LINKS.map((link) => (
           <SidebarMenuItem key={link.title}>
-            <SidebarMenuButton asChild>
-              <Link to={`/${link.url}`}>
-                <link.Icon />
-                <span>{link.title}</span>
-              </Link>
+            <SidebarMenuButton disabled>
+              <link.Icon />
+              <span>{link.title}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         ))}

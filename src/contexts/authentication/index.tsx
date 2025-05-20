@@ -1,4 +1,5 @@
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 
 import { decodeJwt } from 'jose'
 
@@ -28,6 +29,7 @@ const channel = new BroadcastChannel('app-authentication')
 const AuthenticationContext = createContext({} as AuthenticationContextTypes.Context)
 
 function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
+  const queryClient = useQueryClient()
   const [user, setUser] = useState<AuthenticationContextTypes.User | null>(() => {
     const accessToken = authenticationStorageUtils.retrieveAccessToken()
 
@@ -44,11 +46,13 @@ function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
     setUser(user)
   }
 
-  function clearAuthentication() {
+  const clearAuthentication = useCallback(() => {
+    queryClient.clear()
+
     authenticationStorageUtils.remove()
 
     setUser(null)
-  }
+  }, [queryClient])
 
   const signIn = useCallback((input: AuthenticationContextTypes.SignInInput) => {
     saveAuthentication(input)
@@ -60,7 +64,7 @@ function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
     clearAuthentication()
 
     channel.postMessage(null)
-  }, [])
+  }, [clearAuthentication])
 
   const contextValue = useMemo<AuthenticationContextTypes.Context>(
     () => ({ user, signIn, signOut }),
@@ -83,7 +87,7 @@ function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
     return () => {
       channel.removeEventListener('message', handleAuthenticaionChanged)
     }
-  }, [])
+  }, [clearAuthentication])
 
   useEffect(() => {
     eventUtils.subscribe(
@@ -96,7 +100,7 @@ function AuthenticationProvider(props: AuthenticationProviderTypes.Props) {
         starschedEnv.sessionExpiredEventName,
         clearAuthentication,
       )
-  }, [])
+  }, [clearAuthentication])
 
   return <AuthenticationContext.Provider value={contextValue} {...props} />
 }

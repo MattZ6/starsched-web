@@ -2,6 +2,7 @@ import { SuspenseRouterOutlet } from "@/components/suspense-router-outlet";
 
 import { Header } from "./components/header";
 import { Footer } from "./components/footer";
+import { Loading } from "./components/loading";
 
 export function BaseLayout() {
   return (
@@ -9,7 +10,9 @@ export function BaseLayout() {
       <Header />
 
       <div className="grow">
-        <SuspenseRouterOutlet />
+        <SuspenseRouterOutlet
+          loadingComponent={<Loading />}
+        />
       </div>
 
       <Footer />

@@ -20,7 +20,7 @@ i18next
     supportedLngs: ['pt'],
     fallbackLng: 'pt',
     defaultNS: 'base-layout',
-    ns: ['base-layout'],
+    ns: ['common', 'base-layout'],
     detection: {
       lookupLocalStorage: localStorageUtils.mountStorageKey('language'),
       lookupQuerystring: 'lang',

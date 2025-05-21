@@ -1,4 +1,5 @@
-import { SuspenseRouterOutlet } from "@/components/suspense-router-outlet";
+import { Outlet } from "react-router-dom";
+
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
 import { Sidemenu } from "./components/sidemenu";
@@ -9,7 +10,7 @@ export function PrivateLayout() {
       <Sidemenu />
 
       <SidebarInset>
-        <SuspenseRouterOutlet />
+        <Outlet />
       </SidebarInset>
     </SidebarProvider>
   )

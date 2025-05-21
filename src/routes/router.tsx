@@ -10,6 +10,7 @@ import { PrivateRoutesNavGuard } from './guards/private'
 import { PublicRoutesNavGuard } from './guards/public'
 import { CompanyRoutesNavGuard } from './guards/company'
 import { OnboardingRoutesNavGuard } from './guards/onboarding'
+import { SuspenseRouterOutlet } from '@/components/suspense-router-outlet'
 
 const SignInPage = lazy(() => import('@/pages/public/sign-in'))
 const SignUpPage = lazy(() => import('@/pages/public/sign-up'))
@@ -35,7 +36,9 @@ export function Router() {
       <Route element={<PrivateRoutesNavGuard />}>
         <Route path="/:companySlug" element={<CompanyRoutesNavGuard />}>
           <Route element={<PrivateLayout />}>
-            <Route index element={<HomePage />} />
+            <Route element={<SuspenseRouterOutlet />}>
+              <Route index element={<HomePage />} />
+            </Route>
           </Route>
         </Route>
 

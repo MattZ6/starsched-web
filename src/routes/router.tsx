@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 
 import { BaseLayout } from '@/layouts/base'
 import { PrivateLayout } from '@/layouts/private'
+import { TeamLayout } from '@/layouts/team'
 // import { SettingsLayout } from '@/layouts/Settings'
-// import { StaffLayout } from '@/layouts/Staff'
 
 import { PrivateRoutesNavGuard } from './guards/private'
 import { PublicRoutesNavGuard } from './guards/public'
@@ -39,6 +39,8 @@ export function Router() {
             <Route element={<SuspenseRouterOutlet />}>
               <Route index element={<HomePage />} />
             </Route>
+
+            <Route path="team" element={<TeamLayout />} />
           </Route>
         </Route>
 

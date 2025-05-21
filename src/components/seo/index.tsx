@@ -5,7 +5,7 @@ type Props = {
 }
 
 export function SEO({ title }: Props) {
-  const pageTitle = `${title} — ${app.name}`
+  const pageTitle = `${title} – ${app.name}`
 
   return (
     <title>{pageTitle}</title>

@@ -23,8 +23,7 @@ const ForgotPasswordPage = lazy(() => import('@/pages/public/forgot-password'))
 const OnboardingPage = lazy(() => import('@/pages/private/onboarding'))
 
 const HomePage = lazy(() => import('@/pages/private/home'))
-// const CompanyMembers = lazy(() => import('@/pages/CompanyMembers'))
-// const CompanyInvitations = lazy(() => import('@/pages/CompanyInvitations'))
+const TeamPage = lazy(() => import('@/pages/private/team'))
 // const PatientsPage = lazy(() => import('@/pages/Patients'))
 // const PatientPage = lazy(() => import('@/pages/Patient'))
 // const AppearancePage = lazy(() => import('@/pages/Settings/Appearance'))
@@ -40,7 +39,9 @@ export function Router() {
               <Route index element={<HomePage />} />
             </Route>
 
-            <Route path="team" element={<TeamLayout />} />
+            <Route path="team" element={<TeamLayout />}>
+              <Route index element={<TeamPage />} />
+            </Route>
           </Route>
         </Route>
 

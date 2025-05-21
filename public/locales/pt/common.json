@@ -4,6 +4,29 @@
       "owner": "Dono(a)",
       "manager": "Gerente",
       "collaborator": "Colaborador(a)"
+    },
+    "access": {
+      "enabled": "Habilitado",
+      "disabled": "Desabilitado"
+    }
+  },
+  "pagination": {
+    "pages": "Página {{page}} de {{totalPages}}",
+    "first-page": {
+      "tooltip": "Primeira página",
+      "label": "Ir para a primeira página"
+    },
+    "previous-page": {
+      "tooltip": "Página anterior",
+      "label": "Ir para a página anterior"
+    },
+    "next-page": {
+      "tooltip": "Próxima página",
+      "label": "Ir para a próxima página"
+    },
+    "last-page": {
+      "tooltip": "Última página",
+      "label": "Ir para a última página"
     }
   },
   "private-nav-guard": {

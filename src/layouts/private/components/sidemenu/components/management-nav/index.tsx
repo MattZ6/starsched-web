@@ -1,3 +1,5 @@
+import { NavLink, useParams } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { ContactRound, Users } from "lucide-react"
 
 import {
@@ -8,32 +10,35 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-const LINKS = [
-  {
-    Icon: ContactRound,
-    title: 'Equipe',
-    url: 'team'
-  },
-  {
-    Icon: Users,
-    title: 'Pacientes',
-    url: 'admin/patients'
-  },
-]
+type Params = {
+  companySlug: string
+}
 
 export function ManagementNav() {
+  const { t } = useTranslation('company-layout', { keyPrefix: 'sidemenu.management-nav' })
+  const { companySlug } = useParams<Params>()
+
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Gerencia</SidebarGroupLabel>
+      <SidebarGroupLabel>{t('label')}</SidebarGroupLabel>
       <SidebarMenu>
-        {LINKS.map((link) => (
-          <SidebarMenuItem key={link.title}>
-            <SidebarMenuButton disabled>
-              <link.Icon />
-              <span>{link.title}</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        ))}
+        <SidebarMenuItem>
+          <SidebarMenuButton asChild>
+            <NavLink
+              to={`/${companySlug}/team`}
+              className="text-muted-foreground aria-[current='page']:text-foreground"
+            >
+              <ContactRound />
+              <span>{t('team.link.label')}</span>
+            </NavLink>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+          <SidebarMenuButton disabled>
+            <Users />
+            <span>{t('patients.link.label')}</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   )

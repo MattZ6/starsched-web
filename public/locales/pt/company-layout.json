@@ -5,6 +5,19 @@
       "add-company-button": {
         "label": "Nova clínica"
       }
+    },
+    "management-nav": {
+      "label": "Clínica",
+      "team": {
+        "link": {
+          "label": "Equipe"
+        }
+      },
+      "patients": {
+        "link": {
+          "label": "Pacientes"
+        }
+      }
     }
   }
 }

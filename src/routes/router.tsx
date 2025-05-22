@@ -6,10 +6,6 @@ import { PrivateLayout } from '@/layouts/private'
 import { TeamLayout } from '@/layouts/team'
 // import { SettingsLayout } from '@/layouts/Settings'
 
-import { PrivateRoutesNavGuard } from './guards/private'
-import { PublicRoutesNavGuard } from './guards/public'
-import { CompanyRoutesNavGuard } from './guards/company'
-import { OnboardingRoutesNavGuard } from './guards/onboarding'
 import { SuspenseRouterOutlet } from '@/components/suspense-router-outlet'
 
 const SignInPage = lazy(() => import('@/pages/public/sign-in'))
@@ -24,10 +20,16 @@ const OnboardingPage = lazy(() => import('@/pages/private/onboarding'))
 
 const HomePage = lazy(() => import('@/pages/private/home'))
 const TeamPage = lazy(() => import('@/pages/private/team'))
+const CompanyInvitesPage = lazy(() => import('@/pages/private/invites'))
 // const PatientsPage = lazy(() => import('@/pages/Patients'))
 // const PatientPage = lazy(() => import('@/pages/Patient'))
 // const AppearancePage = lazy(() => import('@/pages/Settings/Appearance'))
 // const NotFoundPage = lazy(() => import('@/pages/NotFound'))
+
+import { PrivateRoutesNavGuard } from './guards/private'
+import { PublicRoutesNavGuard } from './guards/public'
+import { CompanyRoutesNavGuard } from './guards/company'
+import { OnboardingRoutesNavGuard } from './guards/onboarding'
 
 export function Router() {
   return (
@@ -41,6 +43,7 @@ export function Router() {
 
             <Route path="team" element={<TeamLayout />}>
               <Route index element={<TeamPage />} />
+              <Route path="invites" element={<CompanyInvitesPage />} />
             </Route>
           </Route>
         </Route>
@@ -50,23 +53,14 @@ export function Router() {
             <Route index element={<OnboardingPage />} />
           </Route>
 
-          {/* <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-
-          <Route path="/staff" element={<StaffLayout />}>
-          <Route index element={<CompanyMembers />} />
-          <Route path="invites" element={<CompanyInvitations />} />
-          </Route>
-
-          <Route path="/patients" element={<PatientsPage />} />
+          {/* <Route path="/patients" element={<PatientsPage />} />
           <Route path="/patients/:id" element={<PatientPage />} />
 
           <Route path="/settings" element={<SettingsLayout />}>
-          <Route index element={<AppearancePage />} />
+            <Route index element={<AppearancePage />} />
           </Route>
 
-          <Route path="*" element={<NotFoundPage />} />
-          </Route> */}
+          <Route path="*" element={<NotFoundPage />} /> */}
         </Route>
       </Route>
 

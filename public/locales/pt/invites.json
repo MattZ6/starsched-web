@@ -1,0 +1,93 @@
+{
+  "invites": {
+    "meta": {
+      "title": "Convites"
+    },
+    "page": {
+      "header": {
+        "actions": {
+          "invite": {
+            "label": "Convidar"
+          }
+        }
+      },
+      "table": {
+        "header": {
+          "email": "Endereço de email",
+          "role": "Função",
+          "status": "Status",
+          "invited-at": "Convidado em"
+        },
+        "row": {
+          "actions": {
+            "label": "Mais opções",
+            "resend": {
+              "label": "Reenviar"
+            },
+            "update-role": {
+              "label": "Alterar papel"
+            },
+            "delete": {
+              "label": "Deletar"
+            }
+          }
+        },
+        "empty": {
+          "message": "Nenhum convite encontrado"
+        },
+        "footer": {
+          "invites-count_zero": "Nenhum convite",
+          "invites-count_one": "Um convite",
+          "invites-count_other": "{{count}} convites"
+        }
+      },
+      "failure": {
+        "validation": {
+          "title": "Busca inválida",
+          "description": "Parece que a busca que você está tentando realizar possui parâmetros inválidos.\nVerifique os logs.",
+          "back": {
+            "button": {
+              "label": "Voltar ao início"
+            }
+          }
+        },
+        "company-not-exists": {
+          "title": "Clínica não encontrada",
+          "description": "A clínica que você está tentando acessar não existe ou foi removida.",
+          "back": {
+            "button": {
+              "label": "Voltar ao início"
+            }
+          }
+        },
+        "access-denied": {
+          "title": "Acesso negado",
+          "description": "Desculpe, mas parece que você não tem permissão para visualizar os convites da clínica.",
+          "back": {
+            "button": {
+              "label": "Voltar ao início"
+            }
+          }
+        },
+        "internal": {
+          "title": "Falha ao carregar os convites da clínica",
+          "description": "Não foi possível completar sua solicitação neste momento.\nPor favor, aguarde alguns instantes e tente novamente.",
+          "try-again": {
+            "button": {
+              "label": "Tentar novamente"
+            }
+          }
+        },
+        "exception": {
+          "title": "Ops! Algo deu errado...",
+          "description": "Não foi possível carregar os convites da clínica.\nTente novamente mais tarde ou entre em contato com o suporte.",
+          "try-again": {
+            "button": {
+              "label": "Tentar novamente"
+            }
+          }
+        }
+      }
+    }
+  }
+}

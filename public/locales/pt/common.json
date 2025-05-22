@@ -8,6 +8,14 @@
     "access": {
       "enabled": "Habilitado",
       "disabled": "Desabilitado"
+    },
+    "invite": {
+      "expired": "Expirado",
+      "status": {
+        "pending": "Pendente",
+        "accepted": "Aceito",
+        "rejected": "Rejeitado"
+      }
     }
   },
   "pagination": {

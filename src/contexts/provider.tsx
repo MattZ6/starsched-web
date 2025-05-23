@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AlertModalProvider } from '@/providers/alert-modal'
 import { ConfirmationModalProvider } from '@/providers/confirmation-modal'
 
+import { Toaster } from '@/components/ui/sonner'
+
 import { AuthenticationProvider } from './authentication'
 import { LanguageProvider } from './language'
 import { ThemeProvider } from './theme'
@@ -29,6 +31,7 @@ export function Provider(props: Props) {
 
         <AlertModalProvider />
         <ConfirmationModalProvider />
+        <Toaster />
       </>
     </ThemeProvider>
   )

@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { MoreHorizontal, Pencil, Send, Trash2 } from "lucide-react";
+import { MoreHorizontal, Send, Trash2 } from "lucide-react";
+import type { CompanyInvite } from "@starsched/sdk";
 
 import { Tooltip } from "@/components/tooltip";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function Actions() {
+import { UpdateRoleAction } from "./components/update-role";
+
+type Props = {
+  companyId: string
+  invite: CompanyInvite
+}
+
+export function Actions({ companyId, invite }: Props) {
   const { t } = useTranslation('invites', { keyPrefix: 'invites.page.table.row.actions' })
 
   return (
@@ -30,10 +38,7 @@ export function Actions() {
           {t('resend.label')}
         </DropdownMenuItem>
 
-        <DropdownMenuItem disabled>
-          <Pencil />
-          {t('update-role.label')}
-        </DropdownMenuItem>
+        <UpdateRoleAction companyId={companyId} invite={invite} />
 
         <DropdownMenuSeparator />
 

@@ -33,7 +33,7 @@ export function InviteRow({ invite }: Props) {
   const invitedAtDateTime = dateUtils.formatDateTime(invite.created_at, { locale: language })
 
   return (
-    <TableRow >
+    <TableRow>
       <TableCell className="px-4">
         <div className={cn("flex items-center gap-3", invite.is_expired ? 'opacity-30' : '')}>
           <Avatar className="size-10">
@@ -78,7 +78,7 @@ export function InviteRow({ invite }: Props) {
       </TableCell>
       <TableCell className="text-right px-4">
         {canEdit && (
-          <Actions />
+          <Actions companyId={selectedCompany.id} invite={invite} />
         )}
       </TableCell>
     </TableRow>

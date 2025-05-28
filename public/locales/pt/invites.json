@@ -14,7 +14,7 @@
       "table": {
         "header": {
           "email": "Endereço de email",
-          "role": "Função",
+          "role": "Papel",
           "status": "Status",
           "invited-at": "Convidado em"
         },
@@ -25,7 +25,103 @@
               "label": "Reenviar"
             },
             "update-role": {
-              "label": "Alterar papel"
+              "label": "Alterar papel",
+              "form": {
+                "title": "Alterar papel",
+                "description": "",
+                "fields": {
+                  "role": {
+                    "label": "Papel",
+                    "validation": {
+                      "required": "O papel é obrigatório",
+                      "invalid": "Selecione um papel entre Colaborador(a) e Gerente"
+                    }
+                  }
+                },
+                "actions": {
+                  "submit": {
+                    "label": "Salvar"
+                  }
+                },
+                "errors": {
+                  "invalid-company-id": {
+                    "title": "ID da clínica inválido",
+                    "description": {
+                      "required": "O ID da clínica é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID da clínica deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID da clínica não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "invalid-invite-id": {
+                    "title": "ID do convite inválido",
+                    "description": {
+                      "required": "O ID do convite é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID do convite deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID do convite não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas parece que você não tem permissão para alterar o papel dos membros convidados nesta clínica.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-not-exists": {
+                    "title": "Clínica não encontrada",
+                    "description": "Você está tentando alterar o papel de um convite numa clínica que não existe ou foi deletada.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-invite-not-exists": {
+                    "title": "Convite não encontrado",
+                    "description": "Você está tentando alterar o papel de um convite que não existe ou foi deletado.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-invite-expired": {
+                    "title": "Convite expirado",
+                    "description": "Parece que esse convite já expirou. Se precisar, você pode reenvia-lo.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  },
+                  "company-invite-not-pending": {
+                    "title": "Este convite não está pendente",
+                    "description": "Você não pode editar convites já aceitos ou recusados. Se precisar, crie outro convite.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  },
+                  "internal": {
+                    "title": "Falha ao alterar o papel",
+                    "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  },
+                  "exception": {
+                    "title": "Ops! Algo deu errado...",
+                    "description": "Detectamos uma falha ao alterar o papel deste usuário convidado. Tente novamente ou entre em contato com o suporte.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  }
+                },
+                "success": {
+                  "toast": {
+                    "title": "Papel alterado com sucesso"
+                  }
+                }
+              }
             },
             "delete": {
               "label": "Deletar"

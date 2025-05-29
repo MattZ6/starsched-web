@@ -10,18 +10,19 @@ type Props<
 > = Pick<ControllerProps<TFieldValues, TName>, 'control' | 'disabled' | 'name'> & {
   label: string
   type?: "text" | "email"
+  className?: string
 }
 
 export function TextField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({ control, name, label, type = 'text', disabled }: Props<TFieldValues, TName>) {
+>({ control, name, label, type = 'text', disabled, className }: Props<TFieldValues, TName>) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={className}>
           <FormLabel>{label}</FormLabel>
           <FormControl>
             <Input

@@ -11,18 +11,19 @@ type Props<
   label: string
   placeholder?: string
   children: ReactNode | Iterable<ReactNode>
+  className?: string
 }
 
 export function SelectField<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->({ control, name, label, placeholder, disabled, children }: Props<TFieldValues, TName>) {
+>({ control, name, label, placeholder, disabled, children,className }: Props<TFieldValues, TName>) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem>
+        <FormItem className={className}>
           <FormLabel>{label}</FormLabel>
           <Select
             onValueChange={field.onChange}

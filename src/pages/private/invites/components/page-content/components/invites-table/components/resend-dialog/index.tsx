@@ -81,7 +81,7 @@ export function ResendDialog() {
     }
 
     try {
-      await mutateAsync({ companyId: 'x', inviteId })
+      await mutateAsync({ companyId, inviteId })
 
       onSuccess()
     } catch (error) {
@@ -92,35 +92,35 @@ export function ResendDialog() {
           return
         }
 
-        // if (error.code === 'validation') {
-        //   const { validation } = error
+        if (error.code === 'validation') {
+          const { validation } = error
 
-        //   if (validation.field === 'company_id') {
-        //     showAlert({
-        //       icon: Bug,
-        //       title: t('errors.invalid-company-id.title'),
-        //       description: t(`errors.invalid-company-id.description.${validation.type}`),
-        //       closeButton: {
-        //         text: t('errors.invalid-company-id.close-button.label')
-        //       }
-        //     })
+          if (validation.field === 'company_id') {
+            showAlert({
+              icon: Bug,
+              title: t('errors.invalid-company-id.title'),
+              description: t(`errors.invalid-company-id.description.${validation.type}`),
+              closeButton: {
+                text: t('errors.invalid-company-id.close-button.label')
+              }
+            })
 
-        //     return
-        //   }
+            return
+          }
 
-        //   if (validation.field === 'invite_id') {
-        //     showAlert({
-        //       icon: Bug,
-        //       title: t('errors.invalid-invite-id.title'),
-        //       description: t(`errors.invalid-invite-id.description.${validation.type}`),
-        //       closeButton: {
-        //         text: t('errors.invalid-invite-id.close-button.label')
-        //       }
-        //     })
+          if (validation.field === 'invite_id') {
+            showAlert({
+              icon: Bug,
+              title: t('errors.invalid-invite-id.title'),
+              description: t(`errors.invalid-invite-id.description.${validation.type}`),
+              closeButton: {
+                text: t('errors.invalid-invite-id.close-button.label')
+              }
+            })
 
-        //     return
-        //   }
-        // }
+            return
+          }
+        }
 
         if (error.code === 'access.denied') {
           showAlert({

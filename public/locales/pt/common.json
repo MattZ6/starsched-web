@@ -41,7 +41,7 @@
     "profile-check": {
       "loading": {
         "title": "Carregando perfil",
-        "description": "Aguarde alguns instantens enquanto carregamos seu perfil."
+        "description": "Aguarde alguns instantes enquanto carregamos seu perfil."
       },
       "failure": {
         "try-again": {
@@ -68,7 +68,7 @@
   "company-nav-guard": {
     "initializing": {
       "title": "Inicializando",
-      "description": "Aguarde alguns instantens enquanto preparamos tudo para você."
+      "description": "Aguarde alguns instantes enquanto preparamos tudo para você."
     },
     "failure": {
       "try-again": {

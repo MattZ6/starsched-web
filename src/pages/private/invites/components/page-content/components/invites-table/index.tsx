@@ -7,8 +7,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { SkeletonRow } from "../skeleton-row";
 
 import { InviteRow } from "./components/invite-row";
-import { Button } from "@/components/ui/button";
 import { UpdateRoleDialog } from "./components/update-role-dialog";
+import { InviteButton } from "./components/invite-button";
 
 type Props = {
   isFetching: boolean
@@ -31,9 +31,7 @@ export function InvitesTable({ invites, isFetching, itemsPerPage, page, totalIte
       <section className="flex flex-col gap-4">
         <header className="flex items-center justify-end gap-4">
           <div className="flex items-center gap-2">
-            <Button type="button" disabled>
-              {t('header.actions.invite.label')}
-            </Button>
+            <InviteButton />
           </div>
         </header>
 

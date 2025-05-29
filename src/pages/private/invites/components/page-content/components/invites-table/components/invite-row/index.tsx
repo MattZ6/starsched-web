@@ -66,7 +66,7 @@ export function InviteRow({ invite }: Props) {
             invite.is_expired ? 'opacity-30' : ''
           )}
         >
-          {invite.is_expired ? t('invite.expired') : t(`invite.status.${'accepted'}`)}
+          {invite.is_expired ? t('invite.expired') : t(`invite.status.${invite.status}`)}
         </span>
       </TableCell>
       <TableCell className="px-4">

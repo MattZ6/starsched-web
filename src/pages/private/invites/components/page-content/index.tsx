@@ -12,6 +12,7 @@ import { InvitesTable } from "./components/invites-table";
 const ITEMS_PER_PAGE = 5
 
 const eventUtils = new EventUtils()
+const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
 const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
 
 export function PageContent() {
@@ -46,6 +47,14 @@ export function PageContent() {
       setPage(Math.ceil(data.total_items_count / ITEMS_PER_PAGE))
     }
   }, [data])
+
+  useEffect(() => {
+    eventUtils.subscribe(RESET_INVITES_LIST_EVENT_NAME, () => {
+      setPage(1)
+    })
+
+    return () => eventUtils.unsubscribe(RESET_INVITES_LIST_EVENT_NAME, () => { })
+  }, [])
 
   useEffect(() => {
     eventUtils.subscribe(REFETCH_INVITES_PAGE_EVENT_NAME, () => refetch())

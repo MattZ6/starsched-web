@@ -9,6 +9,7 @@ import { SkeletonRow } from "../skeleton-row";
 import { InviteRow } from "./components/invite-row";
 import { UpdateRoleDialog } from "./components/update-role-dialog";
 import { InviteButton } from "./components/invite-button";
+import { DeleteDialog } from "./components/delete-dialog";
 
 type Props = {
   isFetching: boolean
@@ -87,6 +88,7 @@ export function InvitesTable({ invites, isFetching, itemsPerPage, page, totalIte
       </section>
 
       <UpdateRoleDialog />
+      <DeleteDialog />
     </>
   )
 }

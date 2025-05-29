@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { MoreHorizontal, Send, Trash2 } from "lucide-react";
+import { MoreHorizontal, Send } from "lucide-react";
 import type { CompanyInvite } from "@starsched/sdk";
 
 import { Tooltip } from "@/components/tooltip";
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { UpdateRoleAction } from "./components/update-role";
+import { DeleteAction } from "./components/delete";
 
 type Props = {
   companyId: string
@@ -42,10 +43,7 @@ export function Actions({ companyId, invite }: Props) {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem variant="destructive" disabled>
-          <Trash2 />
-          {t('delete.label')}
-        </DropdownMenuItem>
+        <DeleteAction companyId={companyId} inviteId={invite.id} />
       </DropdownMenuContent>
     </DropdownMenu >
   )

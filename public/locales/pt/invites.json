@@ -190,7 +190,90 @@
               }
             },
             "delete": {
-              "label": "Deletar"
+              "label": "Deletar",
+              "dialog": {
+                "title": "Deletar convite",
+                "description": "Você realmente deseja deletar este convite? Essa ação não poderá ser desfeita.",
+                "actions": {
+                  "cancel": {
+                    "label": "Cancelar"
+                  },
+                  "confirm": {
+                    "label": "Deletar"
+                  }
+                },
+                "errors": {
+                  "invalid-company-id": {
+                    "title": "ID da clínica inválido",
+                    "description": {
+                      "required": "O ID da clínica é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID da clínica deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID da clínica não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "invalid-invite-id": {
+                    "title": "ID do convite inválido",
+                    "description": {
+                      "required": "O ID do convite é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID do convite deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID do convite não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-not-exists": {
+                    "title": "Clínica não encontrada",
+                    "description": "A clínica que você está tentando acessar não existe ou foi removida.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-invite-not-exists": {
+                    "title": "Convite não encontrado",
+                    "description": "Você está tentando deletar um convite que não existe ou já foi deletado.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas parece que você não tem permissão deletar convites.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-invite-not-pending": {
+                    "title": "Este convite não está pendente",
+                    "description": "Você não pode deletar convites já aceitos ou recusados. Se precisar, crie outro convite.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  },
+                  "internal": {
+                    "title": "Falha ao deletar o convite",
+                    "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  },
+                  "exception": {
+                    "title": "Ops! Algo deu errado...",
+                    "description": "Detectamos uma falha ao deletar o convite. Tente novamente ou entre em contato com o suporte.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  }
+                },
+                "success": {
+                  "toast": {
+                    "title": "Convite deletado com sucesso"
+                  }
+                }
+              }
             }
           }
         },

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { MoreHorizontal, Send } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import type { CompanyInvite } from "@starsched/sdk";
 
 import { Tooltip } from "@/components/tooltip";
@@ -7,13 +7,13 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 import { UpdateRoleAction } from "./components/update-role";
 import { DeleteAction } from "./components/delete";
+import { ResendAction } from "./components/resend";
 
 type Props = {
   companyId: string
@@ -34,10 +34,7 @@ export function Actions({ companyId, invite }: Props) {
       </Tooltip>
 
       <DropdownMenuContent align="end">
-        <DropdownMenuItem disabled>
-          <Send />
-          {t('resend.label')}
-        </DropdownMenuItem>
+        <ResendAction companyId={companyId} inviteId={invite.id} />
 
         <UpdateRoleAction companyId={companyId} invite={invite} />
 

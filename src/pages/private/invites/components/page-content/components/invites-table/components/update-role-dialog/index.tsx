@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { CompanyInvite } from "@starsched/sdk";
 import { useTranslation } from "react-i18next";
 import { CheckCircle2 } from "lucide-react";
@@ -28,11 +28,16 @@ type State = {
 export function UpdateRoleDialog() {
   const { t } = useTranslation('invites', { keyPrefix: 'invites.page.table.row.actions.update-role.form' })
   const [dialogValue, setDialogValue] = useState<State>({ isOpen: false, invitePayload: null })
+  const canCloseRef = useRef(true)
 
-  const handleClose = useCallback(() => setDialogValue({
-    isOpen: false,
-    invitePayload: null,
-  }), [])
+  const handleClose = useCallback((open: boolean) => {
+    if (!open && canCloseRef.current) {
+      setDialogValue({
+        isOpen: false,
+        invitePayload: null,
+      })
+    }
+  }, [])
 
   const handleSuccess = useCallback(() => {
     setDialogValue({
@@ -53,11 +58,23 @@ export function UpdateRoleDialog() {
     event.preventDefault();
   }, [])
 
+  const handleEscButtonClicked = useCallback((event: Event) => {
+    const canClose = canCloseRef.current
+
+    if (!canClose) {
+      event.preventDefault();
+    }
+  }, [])
+
+  const handleSubmitStatusChanged = useCallback((isSubmiting: boolean) => {
+    canCloseRef.current = isSubmiting;
+  }, [])
+
   useEffect(() => {
     eventUtils.subscribe(companyInvitesEventNames.OPEN_UPDATE_ROLE_DIALOG, (event) => {
       if (eventUtils.isCustomEvent<Payload>(event)) {
-
         setDialogValue({ isOpen: true, invitePayload: event.detail })
+        canCloseRef.current = true
       }
     })
 
@@ -68,7 +85,10 @@ export function UpdateRoleDialog() {
 
   return (
     <Dialog open={dialogValue.isOpen} onOpenChange={handleClose}>
-      <DialogContent onInteractOutside={handleOutsideInteractions}>
+      <DialogContent
+        onInteractOutside={handleOutsideInteractions}
+        onEscapeKeyDown={handleEscButtonClicked}
+      >
         <DialogHeader>
           <DialogTitle>{t('title')}</DialogTitle>
           <DialogDescription>{t('description')}</DialogDescription>
@@ -79,6 +99,7 @@ export function UpdateRoleDialog() {
           inviteId={dialogValue.invitePayload?.inviteId}
           currentRole={dialogValue.invitePayload?.currentRole}
           onSubmit={handleSuccess}
+          onSubmitingStatusChanged={handleSubmitStatusChanged}
         />
       </DialogContent>
     </Dialog>

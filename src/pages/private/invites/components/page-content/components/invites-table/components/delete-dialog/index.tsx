@@ -24,7 +24,6 @@ import {
 
 const eventUtils = new EventUtils()
 const DELETE_INVITE_EVENT_NAME = 'delete-invite'
-const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
 const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
 
 type Payload = {
@@ -162,7 +161,10 @@ export function DeleteDialog() {
             icon: ServerOff,
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
-            onClose: () => eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME),
+            onClose: () => {
+              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
+              handleClose()
+            },
             closeButton: {
               text: t('errors.company-invite-not-exists.close-button.label'),
             }
@@ -176,10 +178,15 @@ export function DeleteDialog() {
             icon: MailOpen,
             title: t('errors.company-invite-not-pending.title'),
             description: t('errors.company-invite-not-pending.description'),
+            onClose: () => {
+              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
+              handleClose()
+            },
             closeButton: {
               text: t('errors.company-invite-not-pending.close-button.label'),
             }
           })
+
           return
         }
 

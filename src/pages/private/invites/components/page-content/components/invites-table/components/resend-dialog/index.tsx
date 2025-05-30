@@ -25,6 +25,7 @@ import {
 const eventUtils = new EventUtils()
 const RESEND_INVITE_EVENT_NAME = 'resend-company-invite'
 const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
+const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
 
 type Payload = {
   companyId: string
@@ -195,6 +196,9 @@ export function ResendDialog() {
             icon: TimerReset,
             title: t('errors.company-invite-not-expired.title'),
             description: t('errors.company-invite-not-expired.description'),
+            onClose: () => {
+              eventUtils.emit(REFETCH_INVITES_PAGE_EVENT_NAME)
+            },
             closeButton: {
               text: t('errors.company-invite-not-expired.close-button.label'),
             }

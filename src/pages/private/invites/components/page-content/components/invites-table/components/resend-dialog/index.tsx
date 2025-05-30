@@ -12,6 +12,8 @@ import { useAuthentication } from "@/hooks/use-authentication";
 import { EventUtils } from "@/utils/event";
 import { isStarSchedError } from "@/utils/is-starsched-error";
 
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,9 +25,6 @@ import {
 } from "@/components/ui/dialog";
 
 const eventUtils = new EventUtils()
-const RESEND_INVITE_EVENT_NAME = 'resend-company-invite'
-const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
-const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
 
 type Payload = {
   companyId: string
@@ -163,7 +162,7 @@ export function ResendDialog() {
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
             onClose: () => {
-              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
               handleClose()
             },
             closeButton: {
@@ -180,7 +179,7 @@ export function ResendDialog() {
             title: t('errors.company-invite-not-pending.title'),
             description: t('errors.company-invite-not-pending.description'),
             onClose: () => {
-              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
               handleClose()
             },
             closeButton: {
@@ -197,7 +196,7 @@ export function ResendDialog() {
             title: t('errors.company-invite-not-expired.title'),
             description: t('errors.company-invite-not-expired.description'),
             onClose: () => {
-              eventUtils.emit(REFETCH_INVITES_PAGE_EVENT_NAME)
+              eventUtils.emit(companyInvitesEventNames.RESET_PAGE)
             },
             closeButton: {
               text: t('errors.company-invite-not-expired.close-button.label'),
@@ -231,7 +230,7 @@ export function ResendDialog() {
   }, [dialogValue.invitePayload, handleClose, mutateAsync, navigate, onSuccess, showAlert, signOut, t])
 
   useEffect(() => {
-    eventUtils.subscribe(RESEND_INVITE_EVENT_NAME, (event) => {
+    eventUtils.subscribe(companyInvitesEventNames.OPEN_RESEND_DIALOG, (event) => {
       if (eventUtils.isCustomEvent<Payload>(event)) {
 
         setDialogValue({ isOpen: true, invitePayload: event.detail })
@@ -239,7 +238,7 @@ export function ResendDialog() {
     })
 
     return () => {
-      eventUtils.unsubscribe(RESEND_INVITE_EVENT_NAME, () => { });
+      eventUtils.unsubscribe(companyInvitesEventNames.OPEN_RESEND_DIALOG, () => { });
     }
   }, [])
 

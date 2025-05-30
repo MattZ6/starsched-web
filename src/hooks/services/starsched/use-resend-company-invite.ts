@@ -4,12 +4,13 @@ import { resendCompanyInvite } from "@/services/starsched/resend-company-invite"
 
 import { EventUtils } from "@/utils/event"
 
+import { companyInvitesEventNames } from "@/constants/company-invites"
+
 const eventUtils = new EventUtils()
-const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
 
 export function useResendCompanyInvite() {
   return useMutation({
     mutationFn: resendCompanyInvite,
-    onSuccess: () => eventUtils.emit(REFETCH_INVITES_PAGE_EVENT_NAME)
+    onSuccess: () => eventUtils.emit(companyInvitesEventNames.RESET_PAGE)
   })
 }

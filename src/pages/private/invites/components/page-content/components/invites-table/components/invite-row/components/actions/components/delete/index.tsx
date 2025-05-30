@@ -2,12 +2,13 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Trash2 } from "lucide-react";
 
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
 import { EventUtils } from "@/utils/event";
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 const eventUtils = new EventUtils()
-const DELETE_INVITE_EVENT_NAME = 'delete-invite'
 
 type Props = {
   companyId: string
@@ -18,7 +19,7 @@ export function DeleteAction({ companyId, inviteId }: Props) {
   const { t } = useTranslation('invites', { keyPrefix: 'invites.page.table.row.actions.delete' })
 
   const handleOpen = useCallback(() => {
-    eventUtils.emit(DELETE_INVITE_EVENT_NAME, { companyId, inviteId });
+    eventUtils.emit(companyInvitesEventNames.OPEN_DELETE_DIALOG, { companyId, inviteId });
   }, [companyId, inviteId])
 
   return (

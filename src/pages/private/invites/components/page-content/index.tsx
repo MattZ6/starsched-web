@@ -8,6 +8,7 @@ import { EventUtils } from "@/utils/event";
 import { Loading } from "./components/loading";
 import { Failure } from "./components/failure";
 import { InvitesTable } from "./components/invites-table";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ITEMS_PER_PAGE = 5
 
@@ -16,6 +17,7 @@ const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
 const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
 
 export function PageContent() {
+  const queryClient = useQueryClient()
   const selectedCompany = useSelectedCompany()
   const [page, setPage] = useState(1)
   const { isLoading, isFetching, error, refetch, data } = useGetCompanyInvitations({
@@ -51,16 +53,19 @@ export function PageContent() {
   useEffect(() => {
     eventUtils.subscribe(RESET_INVITES_LIST_EVENT_NAME, () => {
       setPage(1)
+
+      queryClient.refetchQueries({
+        queryKey: ['company-invitations', selectedCompany?.id]
+      })
     })
 
     return () => eventUtils.unsubscribe(RESET_INVITES_LIST_EVENT_NAME, () => { })
-  }, [])
+  }, [queryClient, selectedCompany?.id])
 
   useEffect(() => {
     eventUtils.subscribe(REFETCH_INVITES_PAGE_EVENT_NAME, () => refetch())
 
     return () => eventUtils.unsubscribe(REFETCH_INVITES_PAGE_EVENT_NAME, () => { })
-
   }, [refetch])
 
   if (isLoading) {

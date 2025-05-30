@@ -22,6 +22,7 @@ import { getUpdateInviteRoleSchema, type UpdateInviteRoleSchemaInput } from "./s
 
 const eventUtils = new EventUtils()
 const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
+const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
 
 type Props = {
   companyId?: string
@@ -55,7 +56,7 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
     const { role } = input
 
     try {
-      await mutateAsync({ companyId: 'asjbd', inviteId, role })
+      await mutateAsync({ companyId, inviteId, role })
 
       onSubmit()
     } catch (error) {
@@ -150,7 +151,9 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
             icon: ServerOff,
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
-            onClose: () => navigate('/', { replace: true }),
+            onClose: () => {
+              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
+            },
             closeButton: {
               text: t('errors.company-invite-not-exists.close-button.label'),
             }

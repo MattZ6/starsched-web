@@ -30,6 +30,7 @@ import { PrivateRoutesNavGuard } from './guards/private'
 import { PublicRoutesNavGuard } from './guards/public'
 import { CompanyRoutesNavGuard } from './guards/company'
 import { OnboardingRoutesNavGuard } from './guards/onboarding'
+import { CompanyRoleNavGuard } from './guards/company-role'
 
 export function Router() {
   return (
@@ -43,7 +44,9 @@ export function Router() {
 
             <Route path="team" element={<TeamLayout />}>
               <Route index element={<TeamPage />} />
-              <Route path="invites" element={<CompanyInvitesPage />} />
+              <Route element={<CompanyRoleNavGuard allowedRoles={['owner', 'manager']} />}>
+                <Route path="invites" element={<CompanyInvitesPage />} />
+              </Route>
             </Route>
           </Route>
         </Route>

@@ -54,7 +54,7 @@ export function PageContent() {
     eventUtils.subscribe(RESET_INVITES_LIST_EVENT_NAME, () => {
       setPage(1)
 
-      queryClient.refetchQueries({
+      queryClient.resetQueries({
         queryKey: ['company-invitations', selectedCompany?.id]
       })
     })

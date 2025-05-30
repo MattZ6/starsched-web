@@ -29,9 +29,10 @@ type Props = {
   inviteId?: string
   currentRole?: CompanyInvite['role']
   onSubmit: () => void
+  onSubmitingStatusChanged: (isSubmiting: boolean) => void
 }
 
-export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: Props) {
+export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit, onSubmitingStatusChanged }: Props) {
   const { t } = useTranslation('invites', { keyPrefix: 'invites.page.table.row.actions.update-role.form' });
   const { t: commonT } = useTranslation('common', { keyPrefix: 'company.role' })
   const { showAlert } = useAlert()
@@ -52,6 +53,8 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
     if (!companyId || !inviteId) {
       return
     }
+
+    onSubmitingStatusChanged(false)
 
     const { role } = input
 
@@ -214,8 +217,10 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
           text: t('errors.exception.close-button.label')
         }
       })
+    } finally {
+      onSubmitingStatusChanged(true)
     }
-  }, [companyId, form, inviteId, mutateAsync, navigate, onSubmit, showAlert, signOut, t])
+  }, [companyId, form, inviteId, mutateAsync, navigate, onSubmit, onSubmitingStatusChanged, showAlert, signOut, t])
 
   useLayoutEffect(() => form.setFocus('role'), [form])
 

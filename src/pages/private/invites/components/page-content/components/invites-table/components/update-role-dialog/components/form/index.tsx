@@ -183,6 +183,9 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
             icon: MailOpen,
             title: t('errors.company-invite-not-pending.title'),
             description: t('errors.company-invite-not-pending.description'),
+            onClose: () => {
+              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
+            },
             closeButton: {
               text: t('errors.company-invite-not-pending.close-button.label'),
             }

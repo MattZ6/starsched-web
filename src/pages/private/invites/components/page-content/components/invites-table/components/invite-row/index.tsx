@@ -32,10 +32,12 @@ export function InviteRow({ invite }: Props) {
   const invitedAt = dateUtils.formatDate(invite.created_at, { locale: language })
   const invitedAtDateTime = dateUtils.formatDateTime(invite.created_at, { locale: language })
 
+  const expiredClassName = invite.status === 'pending' && invite.is_expired ? cn('opacity-30') : ''
+
   return (
     <TableRow>
       <TableCell className="px-4">
-        <div className={cn("flex items-center gap-3", invite.is_expired ? 'opacity-30' : '')}>
+        <div className={cn("flex items-center gap-3", expiredClassName)}>
           <Avatar className="size-10">
             <AvatarFallback>
               {stringUtils.getAvatarFallback(invite.email)}
@@ -53,7 +55,7 @@ export function InviteRow({ invite }: Props) {
         <div
           className={cn(
             "flex items-center gap-2 w-fit py-0.5 px-3 border border-border rounded-full",
-            invite.is_expired ? 'opacity-30' : ''
+            expiredClassName
           )}
         >
           <span className="text-sm">{t(`role.${invite.role}`)}</span>
@@ -63,7 +65,7 @@ export function InviteRow({ invite }: Props) {
         <span
           className={cn(
             "flex items-center w-fit gap-2 py-0.5 px-3 border border-border rounded-full text-sm",
-            invite.is_expired ? 'opacity-30' : ''
+            expiredClassName
           )}
         >
           {invite.is_expired ? t('invite.expired') : t(`invite.status.${invite.status}`)}
@@ -71,7 +73,7 @@ export function InviteRow({ invite }: Props) {
       </TableCell>
       <TableCell className="px-4">
         <Tooltip message={invitedAtDateTime}>
-          <span className={cn(invite.is_expired ? 'opacity-30' : '')}>
+          <span className={cn(expiredClassName)}>
             {invitedAt}
           </span>
         </Tooltip>

@@ -23,6 +23,12 @@ type Props = {
 export function Actions({ companyId, invite }: Props) {
   const { t } = useTranslation('invites', { keyPrefix: 'invites.page.table.row.actions' })
 
+  const canResend = invite.status === 'pending' && invite.is_expired
+  const canUpdateRole = invite.status === 'pending' && !invite.is_expired
+  const canDelete = invite.status === 'pending' || invite.status === 'rejected'
+
+  const showMenuSeparator = (canResend || canUpdateRole) && canDelete
+
   return (
     <DropdownMenu>
       <Tooltip message={t('label')}>
@@ -34,13 +40,21 @@ export function Actions({ companyId, invite }: Props) {
       </Tooltip>
 
       <DropdownMenuContent align="end">
-        <ResendAction companyId={companyId} inviteId={invite.id} />
+        {canResend && (
+          <ResendAction companyId={companyId} inviteId={invite.id} />
+        )}
 
-        <UpdateRoleAction companyId={companyId} invite={invite} />
+        {canUpdateRole && (
+          <UpdateRoleAction companyId={companyId} invite={invite} />
+        )}
 
-        <DropdownMenuSeparator />
+        {showMenuSeparator && (
+          <DropdownMenuSeparator />
+        )}
 
-        <DeleteAction companyId={companyId} inviteId={invite.id} />
+        {canDelete && (
+          <DeleteAction companyId={companyId} inviteId={invite.id} />
+        )}
       </DropdownMenuContent>
     </DropdownMenu >
   )

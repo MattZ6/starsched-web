@@ -7,6 +7,7 @@ import type { CompanyInvite, UpdateCompanyInviteRole } from "@starsched/sdk";
 import { Ban, Bug, CircleAlert, MailOpen, ServerOff, TimerOff } from "lucide-react";
 
 import { isStarSchedError } from "@/utils/is-starsched-error";
+import { EventUtils } from "@/utils/event";
 
 import { useAlert } from "@/hooks/use-alert";
 import { useAuthentication } from "@/hooks/use-authentication";
@@ -18,6 +19,9 @@ import { SelectItem } from "@/components/ui/select";
 import { SelectField } from "@/components/select-field";
 
 import { getUpdateInviteRoleSchema, type UpdateInviteRoleSchemaInput } from "./schema";
+
+const eventUtils = new EventUtils()
+const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
 
 type Props = {
   companyId?: string
@@ -51,7 +55,7 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
     const { role } = input
 
     try {
-      await mutateAsync({ companyId, inviteId, role })
+      await mutateAsync({ companyId: 'asjbd', inviteId, role })
 
       onSubmit()
     } catch (error) {
@@ -160,6 +164,9 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
             icon: TimerOff,
             title: t('errors.company-invite-expired.title'),
             description: t('errors.company-invite-expired.description'),
+            onClose: () => {
+              eventUtils.emit(REFETCH_INVITES_PAGE_EVENT_NAME)
+            },
             closeButton: {
               text: t('errors.company-invite-expired.close-button.label'),
             }

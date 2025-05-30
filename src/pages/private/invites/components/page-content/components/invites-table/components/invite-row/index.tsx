@@ -29,6 +29,9 @@ export function InviteRow({ invite }: Props) {
 
   const canEdit = selectedCompany?.role === 'owner' || selectedCompany?.role === 'manager'
 
+  const showStatusText = invite.status === 'accepted' || invite.status === 'rejected' || (invite.status === 'pending' && !invite.is_expired)
+  const statusText = showStatusText ? t(`invite.status.${invite.status}`) : t('invite.expired')
+
   const invitedAt = dateUtils.formatDate(invite.created_at, { locale: language })
   const invitedAtDateTime = dateUtils.formatDateTime(invite.created_at, { locale: language })
 
@@ -68,7 +71,7 @@ export function InviteRow({ invite }: Props) {
             expiredClassName
           )}
         >
-          {invite.is_expired ? t('invite.expired') : t(`invite.status.${invite.status}`)}
+          {statusText}
         </span>
       </TableCell>
       <TableCell className="px-4">

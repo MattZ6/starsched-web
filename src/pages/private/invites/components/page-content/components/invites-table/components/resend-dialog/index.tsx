@@ -163,7 +163,6 @@ export function ResendDialog() {
             description: t('errors.company-invite-not-exists.description'),
             onClose: () => {
               eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
-
               handleClose()
             },
             closeButton: {
@@ -179,6 +178,10 @@ export function ResendDialog() {
             icon: MailOpen,
             title: t('errors.company-invite-not-pending.title'),
             description: t('errors.company-invite-not-pending.description'),
+            onClose: () => {
+              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
+              handleClose()
+            },
             closeButton: {
               text: t('errors.company-invite-not-pending.close-button.label'),
             }

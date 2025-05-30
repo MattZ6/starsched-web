@@ -24,6 +24,7 @@ import {
 
 const eventUtils = new EventUtils()
 const RESEND_INVITE_EVENT_NAME = 'resend-company-invite'
+const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
 
 type Payload = {
   companyId: string
@@ -86,7 +87,12 @@ export function ResendDialog() {
       onSuccess()
     } catch (error) {
       if (isStarSchedError<ResendCompanyInvite.Failure>(error)) {
-        if (error.code === 'token.expired' || error.code === 'token.invalid' || error.code === 'token.not.provided' || error.code === 'user.not.exists') {
+        if (
+          error.code === 'token.expired'
+          || error.code === 'token.invalid'
+          || error.code === 'token.not.provided'
+          || error.code === 'user.not.exists'
+        ) {
           signOut()
 
           return
@@ -156,7 +162,7 @@ export function ResendDialog() {
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
             onClose: () => {
-              // TODO: Resetar a query pra consultar os convites novamente (mandar pra primeira página)
+              eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME)
 
               handleClose()
             },

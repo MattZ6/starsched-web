@@ -24,6 +24,8 @@ import {
 
 const eventUtils = new EventUtils()
 const DELETE_INVITE_EVENT_NAME = 'delete-invite'
+const REFETCH_INVITES_PAGE_EVENT_NAME = 'refetch-company-invitations-page'
+const RESET_INVITES_LIST_EVENT_NAME = 'reset-company-invitations-list'
 
 type Payload = {
   companyId: string
@@ -86,7 +88,12 @@ export function DeleteDialog() {
       onSuccess()
     } catch (error) {
       if (isStarSchedError<DeleteCompanyInvite.Failure>(error)) {
-        if (error.code === 'token.expired' || error.code === 'token.invalid' || error.code === 'token.not.provided' || error.code === 'user.not.exists') {
+        if (
+          error.code === 'token.expired'
+          || error.code === 'token.invalid'
+          || error.code === 'token.not.provided'
+          || error.code === 'user.not.exists'
+        ) {
           signOut()
 
           return
@@ -155,11 +162,7 @@ export function DeleteDialog() {
             icon: ServerOff,
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
-            onClose: () => {
-              // TODO: Resetar a query pra consultar os convites novamente (mandar pra primeira página)
-
-              handleClose()
-            },
+            onClose: () => eventUtils.emit(RESET_INVITES_LIST_EVENT_NAME),
             closeButton: {
               text: t('errors.company-invite-not-exists.close-button.label'),
             }

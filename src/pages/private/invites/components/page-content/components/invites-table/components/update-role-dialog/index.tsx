@@ -6,12 +6,13 @@ import { toast } from "sonner"
 
 import { EventUtils } from "@/utils/event";
 
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 import { UpdateRoleForm } from "./components/form";
 
 const eventUtils = new EventUtils()
-const UPDATE_INVITE_ROLE_EVENT_NAME = 'update-invite-role'
 
 type Payload = {
   companyId: string
@@ -53,7 +54,7 @@ export function UpdateRoleDialog() {
   }, [])
 
   useEffect(() => {
-    eventUtils.subscribe(UPDATE_INVITE_ROLE_EVENT_NAME, (event) => {
+    eventUtils.subscribe(companyInvitesEventNames.OPEN_UPDATE_ROLE_DIALOG, (event) => {
       if (eventUtils.isCustomEvent<Payload>(event)) {
 
         setDialogValue({ isOpen: true, invitePayload: event.detail })
@@ -61,7 +62,7 @@ export function UpdateRoleDialog() {
     })
 
     return () => {
-      eventUtils.unsubscribe(UPDATE_INVITE_ROLE_EVENT_NAME, () => { });
+      eventUtils.unsubscribe(companyInvitesEventNames.OPEN_UPDATE_ROLE_DIALOG, () => { });
     }
   }, [])
 

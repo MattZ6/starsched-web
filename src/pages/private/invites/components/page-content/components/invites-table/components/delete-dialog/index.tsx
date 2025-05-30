@@ -9,6 +9,8 @@ import { useAlert } from "@/hooks/use-alert";
 import { useDeleteCompanyInvite } from "@/hooks/services/starsched/use-delete-company-invite";
 import { useAuthentication } from "@/hooks/use-authentication";
 
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
 import { EventUtils } from "@/utils/event";
 import { isStarSchedError } from "@/utils/is-starsched-error";
 
@@ -23,7 +25,6 @@ import {
 } from "@/components/ui/dialog";
 
 const eventUtils = new EventUtils()
-const DELETE_INVITE_EVENT_NAME = 'delete-invite'
 
 type Payload = {
   companyId: string
@@ -86,7 +87,12 @@ export function DeleteDialog() {
       onSuccess()
     } catch (error) {
       if (isStarSchedError<DeleteCompanyInvite.Failure>(error)) {
-        if (error.code === 'token.expired' || error.code === 'token.invalid' || error.code === 'token.not.provided' || error.code === 'user.not.exists') {
+        if (
+          error.code === 'token.expired'
+          || error.code === 'token.invalid'
+          || error.code === 'token.not.provided'
+          || error.code === 'user.not.exists'
+        ) {
           signOut()
 
           return
@@ -156,8 +162,7 @@ export function DeleteDialog() {
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
             onClose: () => {
-              // TODO: Resetar a query pra consultar os convites novamente (mandar pra primeira página)
-
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
               handleClose()
             },
             closeButton: {
@@ -173,10 +178,15 @@ export function DeleteDialog() {
             icon: MailOpen,
             title: t('errors.company-invite-not-pending.title'),
             description: t('errors.company-invite-not-pending.description'),
+            onClose: () => {
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+              handleClose()
+            },
             closeButton: {
               text: t('errors.company-invite-not-pending.close-button.label'),
             }
           })
+
           return
         }
 
@@ -204,7 +214,7 @@ export function DeleteDialog() {
   }, [dialogValue.invitePayload, handleClose, mutateAsync, navigate, onSuccess, showAlert, signOut, t])
 
   useEffect(() => {
-    eventUtils.subscribe(DELETE_INVITE_EVENT_NAME, (event) => {
+    eventUtils.subscribe(companyInvitesEventNames.OPEN_DELETE_DIALOG, (event) => {
       if (eventUtils.isCustomEvent<Payload>(event)) {
 
         setDialogValue({ isOpen: true, invitePayload: event.detail })
@@ -212,7 +222,7 @@ export function DeleteDialog() {
     })
 
     return () => {
-      eventUtils.unsubscribe(DELETE_INVITE_EVENT_NAME, () => { });
+      eventUtils.unsubscribe(companyInvitesEventNames.OPEN_DELETE_DIALOG, () => { });
     }
   }, [])
 

@@ -7,6 +7,9 @@ import type { CompanyInvite, UpdateCompanyInviteRole } from "@starsched/sdk";
 import { Ban, Bug, CircleAlert, MailOpen, ServerOff, TimerOff } from "lucide-react";
 
 import { isStarSchedError } from "@/utils/is-starsched-error";
+import { EventUtils } from "@/utils/event";
+
+import { companyInvitesEventNames } from "@/constants/company-invites";
 
 import { useAlert } from "@/hooks/use-alert";
 import { useAuthentication } from "@/hooks/use-authentication";
@@ -18,6 +21,8 @@ import { SelectItem } from "@/components/ui/select";
 import { SelectField } from "@/components/select-field";
 
 import { getUpdateInviteRoleSchema, type UpdateInviteRoleSchemaInput } from "./schema";
+
+const eventUtils = new EventUtils()
 
 type Props = {
   companyId?: string
@@ -146,7 +151,9 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
             icon: ServerOff,
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
-            onClose: () => navigate('/', { replace: true }),
+            onClose: () => {
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+            },
             closeButton: {
               text: t('errors.company-invite-not-exists.close-button.label'),
             }
@@ -160,6 +167,9 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
             icon: TimerOff,
             title: t('errors.company-invite-expired.title'),
             description: t('errors.company-invite-expired.description'),
+            onClose: () => {
+              eventUtils.emit(companyInvitesEventNames.RESET_PAGE)
+            },
             closeButton: {
               text: t('errors.company-invite-expired.close-button.label'),
             }
@@ -173,6 +183,9 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit }: P
             icon: MailOpen,
             title: t('errors.company-invite-not-pending.title'),
             description: t('errors.company-invite-not-pending.description'),
+            onClose: () => {
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+            },
             closeButton: {
               text: t('errors.company-invite-not-pending.close-button.label'),
             }

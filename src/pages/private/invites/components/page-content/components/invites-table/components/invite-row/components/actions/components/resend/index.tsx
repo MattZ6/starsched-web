@@ -4,10 +4,11 @@ import { Send } from "lucide-react";
 
 import { EventUtils } from "@/utils/event";
 
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 const eventUtils = new EventUtils()
-const RESEND_INVITE_EVENT_NAME = 'resend-company-invite'
 
 type Props = {
   companyId: string
@@ -18,7 +19,7 @@ export function ResendAction({ companyId, inviteId }: Props) {
   const { t } = useTranslation('invites', { keyPrefix: 'invites.page.table.row.actions.resend' })
 
   const handleOpen = useCallback(() => {
-    eventUtils.emit(RESEND_INVITE_EVENT_NAME, { companyId, inviteId });
+    eventUtils.emit(companyInvitesEventNames.OPEN_RESEND_DIALOG, { companyId, inviteId });
   }, [companyId, inviteId])
 
   return (

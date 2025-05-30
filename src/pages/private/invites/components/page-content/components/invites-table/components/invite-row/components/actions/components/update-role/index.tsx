@@ -5,10 +5,11 @@ import type { CompanyInvite } from "@starsched/sdk";
 
 import { EventUtils } from "@/utils/event";
 
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 const eventUtils = new EventUtils()
-const UPDATE_INVITE_ROLE_EVENT_NAME = 'update-invite-role'
 
 type Props = {
   companyId: string
@@ -19,7 +20,10 @@ export function UpdateRoleAction({ companyId, invite }: Props) {
   const { t } = useTranslation('invites', { keyPrefix: 'invites.page.table.row.actions.update-role' })
 
   const handleOpen = useCallback(() => {
-    eventUtils.emit(UPDATE_INVITE_ROLE_EVENT_NAME, { companyId, inviteId: invite.id, currentRole: invite.role });
+    eventUtils.emit(
+      companyInvitesEventNames.OPEN_UPDATE_ROLE_DIALOG,
+      { companyId, inviteId: invite.id, currentRole: invite.role }
+    );
   }, [companyId, invite.id, invite.role])
 
   return (

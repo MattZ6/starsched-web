@@ -12,6 +12,8 @@ import { useAuthentication } from "@/hooks/use-authentication";
 import { EventUtils } from "@/utils/event";
 import { isStarSchedError } from "@/utils/is-starsched-error";
 
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,7 +25,6 @@ import {
 } from "@/components/ui/dialog";
 
 const eventUtils = new EventUtils()
-const RESEND_INVITE_EVENT_NAME = 'resend-company-invite'
 
 type Payload = {
   companyId: string
@@ -86,7 +87,12 @@ export function ResendDialog() {
       onSuccess()
     } catch (error) {
       if (isStarSchedError<ResendCompanyInvite.Failure>(error)) {
-        if (error.code === 'token.expired' || error.code === 'token.invalid' || error.code === 'token.not.provided' || error.code === 'user.not.exists') {
+        if (
+          error.code === 'token.expired'
+          || error.code === 'token.invalid'
+          || error.code === 'token.not.provided'
+          || error.code === 'user.not.exists'
+        ) {
           signOut()
 
           return
@@ -156,8 +162,7 @@ export function ResendDialog() {
             title: t('errors.company-invite-not-exists.title'),
             description: t('errors.company-invite-not-exists.description'),
             onClose: () => {
-              // TODO: Resetar a query pra consultar os convites novamente (mandar pra primeira página)
-
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
               handleClose()
             },
             closeButton: {
@@ -173,6 +178,10 @@ export function ResendDialog() {
             icon: MailOpen,
             title: t('errors.company-invite-not-pending.title'),
             description: t('errors.company-invite-not-pending.description'),
+            onClose: () => {
+              eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+              handleClose()
+            },
             closeButton: {
               text: t('errors.company-invite-not-pending.close-button.label'),
             }
@@ -186,6 +195,9 @@ export function ResendDialog() {
             icon: TimerReset,
             title: t('errors.company-invite-not-expired.title'),
             description: t('errors.company-invite-not-expired.description'),
+            onClose: () => {
+              eventUtils.emit(companyInvitesEventNames.RESET_PAGE)
+            },
             closeButton: {
               text: t('errors.company-invite-not-expired.close-button.label'),
             }
@@ -218,7 +230,7 @@ export function ResendDialog() {
   }, [dialogValue.invitePayload, handleClose, mutateAsync, navigate, onSuccess, showAlert, signOut, t])
 
   useEffect(() => {
-    eventUtils.subscribe(RESEND_INVITE_EVENT_NAME, (event) => {
+    eventUtils.subscribe(companyInvitesEventNames.OPEN_RESEND_DIALOG, (event) => {
       if (eventUtils.isCustomEvent<Payload>(event)) {
 
         setDialogValue({ isOpen: true, invitePayload: event.detail })
@@ -226,7 +238,7 @@ export function ResendDialog() {
     })
 
     return () => {
-      eventUtils.unsubscribe(RESEND_INVITE_EVENT_NAME, () => { });
+      eventUtils.unsubscribe(companyInvitesEventNames.OPEN_RESEND_DIALOG, () => { });
     }
   }, [])
 

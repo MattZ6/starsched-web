@@ -1,14 +1,17 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
 
 import { deleteCompanyInvite } from "@/services/starsched/delete-company-invite"
 
+import { EventUtils } from "@/utils/event"
+
+import { companyInvitesEventNames } from "@/constants/company-invites"
+
+const eventUtils = new EventUtils()
+
 export function useDeleteCompanyInvite() {
-  const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: deleteCompanyInvite,
-    onSuccess: (_, input) => queryClient.refetchQueries({
-      queryKey: ['company-invitations', input.companyId]
-    })
+    onSuccess: () => eventUtils.emit(companyInvitesEventNames.RESET_LIST)
   })
 }

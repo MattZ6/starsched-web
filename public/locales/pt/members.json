@@ -11,6 +11,117 @@
           "access": "Acesso",
           "member-since": "Membro desde"
         },
+        "row": {
+          "actions": {
+            "label": "Mais opções",
+            "update-role": {
+              "label": "Alterar papel",
+              "form": {
+                "title": "Alterar papel",
+                "description": "",
+                "fields": {
+                  "role": {
+                    "label": "Papel",
+                    "validation": {
+                      "required": "O papel é obrigatório",
+                      "invalid": "Selecione um papel entre Colaborador(a) e Gerente"
+                    }
+                  }
+                },
+                "actions": {
+                  "submit": {
+                    "label": "Salvar"
+                  }
+                },
+                "errors": {
+                  "invalid-company-id": {
+                    "title": "ID da clínica inválido",
+                    "description": {
+                      "required": "O ID da clínica é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID da clínica deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID da clínica não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "invalid-member-id": {
+                    "title": "ID do membro inválido",
+                    "description": {
+                      "required": "O ID do membro é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID do membro deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID do membro não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas parece que você não tem permissão para alterar o papel dos membros nesta clínica.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "update-current-user-access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas você não pode alterar seu próprio papel.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "update-owner-access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas você não pode alterar o papel do(a) proprietário(a) da clínica.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "update-to-owner-access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas você não pode alterar o papel de um membro para \"Proprietário(a)\".",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-not-exists": {
+                    "title": "Clínica não encontrada",
+                    "description": "Você está tentando alterar o papel de um membro numa clínica que não existe ou foi deletada.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-member-not-exists": {
+                    "title": "Membro não encontrado",
+                    "description": "Você está tentando alterar o papel de um membro que não existe ou foi deletado.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "internal": {
+                    "title": "Falha ao alterar o papel",
+                    "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  },
+                  "exception": {
+                    "title": "Ops! Algo deu errado...",
+                    "description": "Detectamos uma falha ao alterar o papel deste membro. Tente novamente ou entre em contato com o suporte.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  }
+                },
+                "success": {
+                  "toast": {
+                    "title": "Papel alterado com sucesso"
+                  }
+                }
+              }
+            }
+          }
+        },
         "empty": {
           "message": "Nenhum membro encontrado"
         },

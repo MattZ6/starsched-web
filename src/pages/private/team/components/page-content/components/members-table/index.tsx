@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { SkeletonRow } from "../skeleton-row";
 
 import { MemberRow } from "./components/member-row";
+import { UpdateRoleDialog } from "./components/update-role-dialog";
 
 type Props = {
   isFetching: boolean
@@ -25,56 +26,60 @@ export function MembersTable({ members, isFetching, itemsPerPage, page, totalIte
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   return (
-    <section className="flex flex-col gap-4">
-      <div className="flex flex-col border border-border rounded-md">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="px-4">{t('table.header.member')}</TableHead>
-              <TableHead className="px-4 w-[15%]">{t('table.header.role')}</TableHead>
-              <TableHead className="px-4 w-[15%]">{t('table.header.access')}</TableHead>
-              <TableHead className="px-4 w-[15%]">{t('table.header.member-since')}</TableHead>
-              <TableHead className="w-[68px] text-right px-4"></TableHead>
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {isFetching && <>
-              {Array.from({ length: itemsPerPage }).map((_, index) => <SkeletonRow key={index} index={index} />)}
-            </>}
-
-            {!isFetching && !!members.length && <>
-              {members.map(member => <MemberRow key={member.id} member={member} actionsDisabled={isFetching} />)}
-            </>}
-
-            {!isFetching && !members.length && <>
+    <>
+      <section className="flex flex-col gap-4">
+        <div className="flex flex-col border border-border rounded-md">
+          <Table>
+            <TableHeader>
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground py-4">
-                  {t('table.empty.message')}
-                </TableCell>
+                <TableHead className="px-4">{t('table.header.member')}</TableHead>
+                <TableHead className="px-4 w-[15%]">{t('table.header.role')}</TableHead>
+                <TableHead className="px-4 w-[15%]">{t('table.header.access')}</TableHead>
+                <TableHead className="px-4 w-[15%]">{t('table.header.member-since')}</TableHead>
+                <TableHead className="w-[68px] text-right px-4"></TableHead>
               </TableRow>
-            </>}
-          </TableBody>
-        </Table>
-      </div>
+            </TableHeader>
 
-      <div className="flex items-center gap-4">
-        <span className="text-xs text-muted-foreground self-start">
-          {t('table.footer.members-count', { count: totalItems })}
-        </span>
+            <TableBody>
+              {isFetching && <>
+                {Array.from({ length: itemsPerPage }).map((_, index) => <SkeletonRow key={index} index={index} />)}
+              </>}
 
-        <div className="ml-auto">
-          <TablePagination
-            isLoading={isFetching}
-            page={page}
-            totalPages={totalPages}
-            onFirstPage={onFirstPage}
-            onPreviousPage={onPreviousPage}
-            onNextPage={onNextPage}
-            onLastPage={onLastPage}
-          />
+              {!isFetching && !!members.length && <>
+                {members.map(member => <MemberRow key={member.id} member={member} />)}
+              </>}
+
+              {!isFetching && !members.length && <>
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center text-muted-foreground py-4">
+                    {t('table.empty.message')}
+                  </TableCell>
+                </TableRow>
+              </>}
+            </TableBody>
+          </Table>
         </div>
-      </div>
-    </section>
+
+        <div className="flex items-center gap-4">
+          <span className="text-xs text-muted-foreground self-start">
+            {t('table.footer.members-count', { count: totalItems })}
+          </span>
+
+          <div className="ml-auto">
+            <TablePagination
+              isLoading={isFetching}
+              page={page}
+              totalPages={totalPages}
+              onFirstPage={onFirstPage}
+              onPreviousPage={onPreviousPage}
+              onNextPage={onNextPage}
+              onLastPage={onLastPage}
+            />
+          </div>
+        </div>
+      </section>
+
+      <UpdateRoleDialog />
+    </>
   )
 }

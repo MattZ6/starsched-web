@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { useGetCompanyInvitations } from "@/hooks/services/starsched/use-get-company-invitations";
 import { useSelectedCompany } from "@/hooks/use-selected-company";
@@ -10,7 +11,6 @@ import { companyInvitesEventNames } from "@/constants/company-invites";
 import { Loading } from "./components/loading";
 import { Failure } from "./components/failure";
 import { InvitesTable } from "./components/invites-table";
-import { useQueryClient } from "@tanstack/react-query";
 
 const ITEMS_PER_PAGE = 5
 

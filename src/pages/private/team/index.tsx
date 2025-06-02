@@ -6,6 +6,7 @@ import { PageContent } from "./components/page-content";
 
 export default function TeamPage() {
   const { t } = useTranslation('members', { keyPrefix: 'members.meta' })
+
   return (
     <>
       <CompanySEO title={t('title')} />

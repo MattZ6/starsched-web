@@ -1,6 +1,6 @@
 import type { CompanyMember } from "@starsched/sdk";
 import { useTranslation } from "react-i18next";
-import { Crown, MoreHorizontal } from "lucide-react";
+import { Crown } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,19 +12,18 @@ import { useAuthentication } from "@/hooks/use-authentication";
 import { useSelectedCompany } from "@/hooks/use-selected-company";
 
 import { Tooltip } from "@/components/tooltip";
-import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { TableCell, TableRow } from "@/components/ui/table";
+import { Actions } from "./components/actions";
 
 const stringUtils = new StringUtils()
 const dateUtils = new DateUtils()
 
 type Props = {
-  actionsDisabled: boolean
   member: CompanyMember
 }
 
-export function MemberRow({ member, actionsDisabled }: Props) {
+export function MemberRow({ member }: Props) {
   const { t } = useTranslation('common', { keyPrefix: 'company' })
   const { language } = useLanguage()
   const { user } = useAuthentication()
@@ -88,9 +87,7 @@ export function MemberRow({ member, actionsDisabled }: Props) {
       </TableCell>
       <TableCell className="text-right px-4">
         {canEdit && (
-          <Button variant="ghost" size="icon" disabled={actionsDisabled}>
-            <MoreHorizontal />
-          </Button>
+          <Actions companyId={selectedCompany.id} member={member} />
         )}
       </TableCell>
     </TableRow>

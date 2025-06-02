@@ -10,6 +10,7 @@ import { useGetCompanyPlan } from "@/hooks/services/starsched/use-get-company-pl
 import { Loading } from "./components/loading";
 import { Failure } from "./components/failure";
 import { Plan } from "./components/plan";
+import { companyMembersEventNames } from "@/constants/company-members";
 
 const eventUtils = new EventUtils()
 
@@ -30,6 +31,14 @@ type Props = {
 
 function PlanInfo({ companyId }: Props) {
   const { isLoading, error, refetch, data } = useGetCompanyPlan({ companyId })
+
+  useEffect(() => {
+    eventUtils.subscribe(companyMembersEventNames.RESET_LIST, () => {
+      refetch()
+    })
+
+    return () => eventUtils.unsubscribe(companyMembersEventNames.RESET_LIST, () => { })
+  }, [refetch])
 
   useEffect(() => {
     eventUtils.subscribe(companyInvitesEventNames.RESET_LIST, () => {

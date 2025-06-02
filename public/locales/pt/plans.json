@@ -1,0 +1,16 @@
+{
+  "company-plan": {
+    "name": "Plano {{name}}",
+    "price": "{{price}}/mês",
+    "free": "Gratuito",
+    "members-label": "{{count}} de {{total}} membros",
+    "members-limit-exceeded": "Limite de membros excedido",
+    "no-limits": "Seu plano não possui limite de membros.",
+    "error": {
+      "message": "Não foi possível carregar o seu plano.",
+      "try-again": {
+        "label": "Tentar novamente"
+      }
+    }
+  }
+}

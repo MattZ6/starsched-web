@@ -1,31 +1,53 @@
-import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
+import { useEffect } from "react";
 
-const MAX_MEMBERS = 5
-const MEMBERS_COUNT = 4
+import { companyInvitesEventNames } from "@/constants/company-invites";
+
+import { EventUtils } from "@/utils/event";
+
+import { useSelectedCompany } from "@/hooks/use-selected-company";
+import { useGetCompanyPlan } from "@/hooks/services/starsched/use-get-company-plan";
+
+import { Loading } from "./components/loading";
+import { Failure } from "./components/failure";
+import { Plan } from "./components/plan";
+
+const eventUtils = new EventUtils()
 
 export function PlanProgress() {
-  return (
-    <article className="flex flex-col border border-border rounded-md">
-      <div className="flex items-center gap-6 p-4">
-        <div className="flex flex-col gap-1">
-          <span className="text-xl font-semibold tracking-tight">Plano Pro</span>
-          <p className="text-muted-foreground">
-            Nosso plano mais popular para clínicas de médio porte. Até {MAX_MEMBERS} membros.
-          </p>
-        </div>
+  const selectedCompany = useSelectedCompany()
+  const canView = selectedCompany?.role === 'owner' || selectedCompany?.role === 'manager'
 
-        <span className="font-semibold text-3xl tracking-tight ml-auto">
-          Gratuito
-        </span>
-      </div>
+  if (!selectedCompany || !canView) {
+    return null
+  }
 
-      <Separator />
+  return <PlanInfo companyId={selectedCompany.id} />
+}
 
-      <div className="flex items-center gap-4 p-4">
-        <Progress value={(MEMBERS_COUNT / MAX_MEMBERS) * 100} />
-        <span className="shrink-0 text-sm text-nowrap">{MEMBERS_COUNT} de {MAX_MEMBERS} membros</span>
-      </div>
-    </article>
-  )
+type Props = {
+  companyId: string
+}
+
+function PlanInfo({ companyId }: Props) {
+  const { isLoading, error, refetch, data } = useGetCompanyPlan({ companyId })
+
+  useEffect(() => {
+    eventUtils.subscribe(companyInvitesEventNames.RESET_LIST, () => {
+      refetch()
+    })
+
+    return () => eventUtils.unsubscribe(companyInvitesEventNames.RESET_LIST, () => { })
+  }, [refetch])
+
+  if (isLoading) {
+    return <Loading />
+  }
+
+  if (error) {
+    return <Failure error={error} onTryAgain={refetch} />
+  }
+
+  const companyPlan = data!
+
+  return <Plan plan={companyPlan} />
 }

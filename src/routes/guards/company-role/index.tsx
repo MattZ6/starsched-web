@@ -17,7 +17,7 @@ export function CompanyRoleNavGuard({ allowedRoles }: Props) {
   const allowed = allowedRoles.some(role => role === selectedCompany.role)
 
   if (!allowed) {
-    return <Navigate to="/" />
+    return <Navigate to={`/${selectedCompany.slug}/team`} />
   }
 
   return <Outlet />

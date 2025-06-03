@@ -119,6 +119,125 @@
                   }
                 }
               }
+            },
+            "update-access": {
+              "label": {
+                "activate": "Habilitar acesso",
+                "inactivate": "Remover acesso"
+              },
+              "dialog": {
+                "title": {
+                  "activate": "Habilitar acesso",
+                  "inactivate": "Remover acesso"
+                },
+                "description": {
+                  "activate": "<b>{{user}}</b> voltará a ter acesso à clínica <b>{{company}}</b> e a todas as funcionalidades que ele(a) tinha antes de ter o acesso removido.",
+                  "inactivate": "<b>{{user}}</b> deixará de ter acesso à clínica <b>{{company}}</b>. Não se preocupe, todo o histórico de atendimentos e faturamento continuará intacto."
+                },
+                "actions": {
+                  "cancel": {
+                    "label": "Cancelar"
+                  },
+                  "confirm": {
+                    "label": {
+                      "activate": "Habilitar",
+                      "inactivate": "Remover"
+                    }
+                  }
+                },
+                "errors": {
+                  "invalid-company-id": {
+                    "title": "ID da clínica inválido",
+                    "description": {
+                      "required": "O ID da clínica é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID da clínica deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID da clínica não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "invalid-member-id": {
+                    "title": "ID do membro inválido",
+                    "description": {
+                      "required": "O ID do membro é obrigatório. Verifique o código da solicitação.",
+                      "type": "O ID do membro deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O ID do membro não é um UUID válido. Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "invalid-access": {
+                    "title": "Acesso inválido",
+                    "description": {
+                      "required": "O acesso é obrigatório. Verifique o código da solicitação.",
+                      "type": "O acesso deve ser uma string. Verifique o código da solicitação.",
+                      "invalid": "O acesso deve ser \"Habilitado\" ou \"Desabilitado\". Verifique o código da solicitação."
+                    },
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-not-exists": {
+                    "title": "Clínica não encontrada",
+                    "description": "A clínica que você está tentando acessar não existe ou foi removida.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "company-member-not-exists": {
+                    "title": "Membro não encontrado",
+                    "description": "Você está tentando alterar o acesso de um membro que não existe ou foi deletado.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas parece que você não tem permissão alterar o acesso dos membros desta clínica.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "update-current-user-access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas você não pode alterar seu próprio acesso.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "update-owner-access-denied": {
+                    "title": "Acesso negado",
+                    "description": "Desculpe, mas você não pode alterar o acesso do(a) proprietário(a) da clínica.",
+                    "close-button": {
+                      "label": "Fechar"
+                    }
+                  },
+                  "internal": {
+                    "title": "Falha ao deletar o convite",
+                    "description": "Não foi possível completar sua solicitação neste momento. Por favor, aguarde alguns instantes e tente novamente.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  },
+                  "exception": {
+                    "title": "Ops! Algo deu errado...",
+                    "description": "Detectamos uma falha ao deletar o convite. Tente novamente ou entre em contato com o suporte.",
+                    "close-button": {
+                      "label": "Entendi"
+                    }
+                  }
+                },
+                "success": {
+                  "toast": {
+                    "title": {
+                      "activated": "Acesso habilitado com sucesso",
+                      "inactivated": "Acesso desabilitado com sucesso"
+                    }
+                  }
+                }
+              }
             }
           }
         },

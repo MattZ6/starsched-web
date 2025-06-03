@@ -8,6 +8,7 @@ import { SkeletonRow } from "../skeleton-row";
 
 import { MemberRow } from "./components/member-row";
 import { UpdateRoleDialog } from "./components/update-role-dialog";
+import { UpdateAccessDialog } from "./components/update-access-dialog";
 
 type Props = {
   isFetching: boolean
@@ -80,6 +81,7 @@ export function MembersTable({ members, isFetching, itemsPerPage, page, totalIte
       </section>
 
       <UpdateRoleDialog />
+      <UpdateAccessDialog />
     </>
   )
 }

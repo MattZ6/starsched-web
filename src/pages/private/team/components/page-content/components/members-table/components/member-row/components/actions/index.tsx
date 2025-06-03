@@ -7,17 +7,20 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 import { UpdateRoleAction } from "./components/update-role";
+import { UpdateAccessAction } from "./components/update-access";
 
 type Props = {
   companyId: string
+  companyName: string
   member: CompanyMember
 }
 
-export function Actions({ companyId, member }: Props) {
+export function Actions({ companyId, companyName, member }: Props) {
   const { t } = useTranslation('members', { keyPrefix: 'members.page.table.row.actions' })
 
   return (
@@ -32,6 +35,14 @@ export function Actions({ companyId, member }: Props) {
 
       <DropdownMenuContent align="end">
         <UpdateRoleAction companyId={companyId} member={member} />
+
+        <DropdownMenuSeparator />
+
+        <UpdateAccessAction
+          companyId={companyId}
+          companyName={companyName}
+          member={member}
+        />
       </DropdownMenuContent>
     </DropdownMenu >
   )

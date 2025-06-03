@@ -87,7 +87,11 @@ export function MemberRow({ member }: Props) {
       </TableCell>
       <TableCell className="text-right px-4">
         {canEdit && (
-          <Actions companyId={selectedCompany.id} member={member} />
+          <Actions
+            companyId={selectedCompany.id}
+            companyName={selectedCompany.name}
+            member={member}
+          />
         )}
       </TableCell>
     </TableRow>

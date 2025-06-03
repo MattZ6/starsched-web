@@ -21,6 +21,7 @@ import { SelectItem } from "@/components/ui/select";
 import { SelectField } from "@/components/select-field";
 
 import { getUpdateInviteRoleSchema, type UpdateInviteRoleSchemaInput } from "./schema";
+import { companyPlanEventNames } from "@/constants/company-plan";
 
 const eventUtils = new EventUtils()
 
@@ -156,6 +157,7 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit, onS
             description: t('errors.company-invite-not-exists.description'),
             onClose: () => {
               eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+              eventUtils.emit(companyPlanEventNames.MEMBERS_COUNT_UPDATED)
             },
             closeButton: {
               text: t('errors.company-invite-not-exists.close-button.label'),
@@ -188,6 +190,7 @@ export function UpdateRoleForm({ companyId, inviteId, currentRole, onSubmit, onS
             description: t('errors.company-invite-not-pending.description'),
             onClose: () => {
               eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+              eventUtils.emit(companyPlanEventNames.MEMBERS_COUNT_UPDATED)
             },
             closeButton: {
               text: t('errors.company-invite-not-pending.close-button.label'),

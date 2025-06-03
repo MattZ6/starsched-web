@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { companyInvitesEventNames } from "@/constants/company-invites";
+import { companyPlanEventNames } from "@/constants/company-plan";
 
 import { EventUtils } from "@/utils/event";
 
@@ -10,7 +10,6 @@ import { useGetCompanyPlan } from "@/hooks/services/starsched/use-get-company-pl
 import { Loading } from "./components/loading";
 import { Failure } from "./components/failure";
 import { Plan } from "./components/plan";
-import { companyMembersEventNames } from "@/constants/company-members";
 
 const eventUtils = new EventUtils()
 
@@ -33,19 +32,17 @@ function PlanInfo({ companyId }: Props) {
   const { isLoading, error, refetch, data } = useGetCompanyPlan({ companyId })
 
   useEffect(() => {
-    eventUtils.subscribe(companyMembersEventNames.RESET_LIST, () => {
+    function reloadPlanInfo() {
       refetch()
-    })
+    }
 
-    return () => eventUtils.unsubscribe(companyMembersEventNames.RESET_LIST, () => { })
-  }, [refetch])
+    eventUtils.subscribe(companyPlanEventNames.MEMBERS_COUNT_UPDATED, reloadPlanInfo)
+    eventUtils.subscribe(companyPlanEventNames.INVITES_COUNT_UPDATED, reloadPlanInfo)
 
-  useEffect(() => {
-    eventUtils.subscribe(companyInvitesEventNames.RESET_LIST, () => {
-      refetch()
-    })
-
-    return () => eventUtils.unsubscribe(companyInvitesEventNames.RESET_LIST, () => { })
+    return () => {
+      eventUtils.unsubscribe(companyPlanEventNames.MEMBERS_COUNT_UPDATED, reloadPlanInfo)
+      eventUtils.unsubscribe(companyPlanEventNames.INVITES_COUNT_UPDATED, reloadPlanInfo)
+    }
   }, [refetch])
 
   if (isLoading) {

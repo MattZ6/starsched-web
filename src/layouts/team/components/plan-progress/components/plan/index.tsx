@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next"
 import { AlertCircle, CheckCircle2 } from "lucide-react"
 import type { CompanyPlan } from "@starsched/sdk"
 
-import { cn } from "@/lib/utils"
 import { useLanguage } from "@/hooks/use-language"
 
 import { PriceUtils } from "@/utils/price"
@@ -22,7 +21,7 @@ export function Plan({ plan }: Props) {
   const usedSeats = plan.member.current_active + plan.member.invited
   const limit = plan.member.limit ?? 0
 
-  const limitExceeded = usedSeats >= limit
+  const limitExceeded = plan.member.limit !== null && usedSeats >= limit
 
   const formattedMonthlyPrice = PriceUtils.formatPrice(
     plan.price_in_cents,
@@ -35,7 +34,16 @@ export function Plan({ plan }: Props) {
         <div className="flex flex-col gap-1">
           <span className="text-xl font-semibold tracking-tight">
             {t('name', { name: plan.name })}
+            {limitExceeded && (
+              <span
+                className={"inline-flex items-center gap-1 shrink-0 font-normal text-sm text-nowrap ml-2 text-orange-600 dark:text-orange-400 py-0.5 pl-1.5 pr-2.5 rounded-full border-orange-600 dark:border-orange-400 border"}
+              >
+                <AlertCircle className="size-4" />
+                {t('members-limit-exceeded')}
+              </span>
+            )}
           </span>
+
           <p className="text-muted-foreground">
             {/* TODO: O que colocar de texto aqui? */}
             Nosso plano mais popular para clínicas de médio porte. Até {limit} membros.
@@ -58,13 +66,9 @@ export function Plan({ plan }: Props) {
               limit={limit}
             />
             <span
-              className={cn("flex items-center gap-1 shrink-0 text-sm text-nowrap", limitExceeded ? 'text-orange-600' : '')}
+              className={"flex items-center gap-1 shrink-0 text-sm text-nowrap"}
             >
-              {limitExceeded && <AlertCircle className="size-4" />}
-
-              {limitExceeded
-                ? t('members-limit-exceeded', { count: usedSeats, total: limit })
-                : t('members-label', { count: usedSeats, total: limit })}
+              {t('members-label', { count: usedSeats, total: limit })}
             </span>
           </>
         ) : (
@@ -73,6 +77,6 @@ export function Plan({ plan }: Props) {
           </span>
         )}
       </div>
-    </article>
+    </article >
   )
 }

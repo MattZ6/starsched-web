@@ -47,7 +47,7 @@ function BasicPageText({ className, ...props }: BasicPageTextProps) {
   return <p className={cn("text-base text-center text-muted-foreground", className)} {...props} />
 }
 
-type BasicPageTitleProps = ComponentPropsWithoutRef<'p'>
+type BasicPageTitleProps = ComponentPropsWithoutRef<'h2'>
 
 function BasicPageTitle({ className, ...props }: BasicPageTitleProps) {
   return <h1 className={cn("font-bold text-3xl text-center text-foreground", className)} {...props} />

@@ -1,23 +1,32 @@
 import { SuspenseRouterOutlet } from "@/components/suspense-router-outlet";
+import {
+  PrivatePageBody,
+  PrivatePageDescription,
+  PrivatePageHeader,
+  PrivatePageRoot,
+  PrivatePageTitle,
+} from "@/components/ui/private-page";
 
 import { PlanProgress } from "./components/plan-progress";
 import { TabsNav } from "./components/tabs-nav";
 
 export function TeamLayout() {
+  // TODO: Adicionar traduções
+
   return (
-    <div className="flex flex-col gap-8 p-8">
-      <header className="flex flex-col gap-1">
-        <h2 className="text-3xl font-semibold tracking-tight transition-colors">Equipe</h2>
-        <p className="leading-7 text-muted-foreground">Gerenciar convites e equipes</p>
-      </header>
+    <PrivatePageRoot>
+      <PrivatePageHeader>
+        <PrivatePageTitle>Equipe</PrivatePageTitle>
+        <PrivatePageDescription>Gerenciar convites e equipes</PrivatePageDescription>
+      </PrivatePageHeader>
 
       <PlanProgress />
 
-      <div className="flex flex-col gap-4">
+      <PrivatePageBody>
         <TabsNav />
 
         <SuspenseRouterOutlet />
-      </div>
-    </div>
+      </PrivatePageBody>
+    </PrivatePageRoot>
   )
 }

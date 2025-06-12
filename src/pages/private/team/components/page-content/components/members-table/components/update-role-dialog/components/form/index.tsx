@@ -21,6 +21,7 @@ import { SelectItem } from "@/components/ui/select";
 import { SelectField } from "@/components/select-field";
 
 import { getUpdateMemberRoleSchema, type UpdateMemberRoleSchemaInput } from "./schema";
+import { companyPlanEventNames } from "@/constants/company-plan";
 
 const eventUtils = new EventUtils()
 
@@ -154,6 +155,7 @@ export function UpdateRoleForm({ companyId, memberId, currentRole, onSubmit, onS
             description: t('errors.company-member-not-exists.description'),
             onClose: () => {
               eventUtils.emit(companyMembersEventNames.RESET_LIST)
+              eventUtils.emit(companyPlanEventNames.MEMBERS_COUNT_UPDATED)
             },
             closeButton: {
               text: t('errors.company-member-not-exists.close-button.label'),

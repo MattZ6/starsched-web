@@ -23,6 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { companyPlanEventNames } from "@/constants/company-plan";
 
 const eventUtils = new EventUtils()
 
@@ -163,6 +164,7 @@ export function ResendDialog() {
             description: t('errors.company-invite-not-exists.description'),
             onClose: () => {
               eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+              eventUtils.emit(companyPlanEventNames.MEMBERS_COUNT_UPDATED)
               handleClose()
             },
             closeButton: {
@@ -180,6 +182,7 @@ export function ResendDialog() {
             description: t('errors.company-invite-not-pending.description'),
             onClose: () => {
               eventUtils.emit(companyInvitesEventNames.RESET_LIST)
+              eventUtils.emit(companyPlanEventNames.MEMBERS_COUNT_UPDATED)
               handleClose()
             },
             closeButton: {

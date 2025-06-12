@@ -23,6 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { companyPlanEventNames } from "@/constants/company-plan";
 
 const eventUtils = new EventUtils()
 
@@ -173,6 +174,7 @@ export function UpdateAccessDialog() {
             description: t('errors.company-member-not-exists.description'),
             onClose: () => {
               eventUtils.emit(companyMembersEventNames.RESET_LIST)
+              eventUtils.emit(companyPlanEventNames.MEMBERS_COUNT_UPDATED)
               handleClose()
             },
             closeButton: {

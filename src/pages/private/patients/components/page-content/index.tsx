@@ -1,0 +1,92 @@
+import { useCallback, useEffect, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+
+import { useGetCompanyPatients } from "@/hooks/services/starsched/use-get-company-patients";
+import { useSelectedCompany } from "@/hooks/use-selected-company";
+
+import { EventUtils } from "@/utils/event";
+
+import { Loading } from "./components/loading";
+import { Failure } from "./components/failure";
+import { PatientsTable } from "./components/patients-table";
+import { companyPatientsEventNames } from "@/constants/company-patients";
+
+const ITEMS_PER_PAGE = 5
+
+const eventUtils = new EventUtils()
+
+export function PageContent() {
+  const queryClient = useQueryClient()
+  const selectedCompany = useSelectedCompany()
+  const [page, setPage] = useState(1)
+  const { isLoading, isFetching, error, refetch, data } = useGetCompanyPatients({
+    companyId: selectedCompany!.id,
+    sortBy: 'name',
+    orderBy: 'asc',
+    itemsPerPage: ITEMS_PER_PAGE,
+    page
+  })
+
+  const handleGoToFirstPage = useCallback(() => {
+    setPage(1)
+  }, [])
+
+  const handleGoToPreviousPage = useCallback(() => {
+    setPage(currentPage => currentPage <= 1 ? 1 : currentPage - 1)
+  }, [])
+
+  const handleGoToNextPage = useCallback(() => {
+    if (data) {
+      const totalPages = Math.ceil(data.total_items_count / ITEMS_PER_PAGE)
+
+      setPage(currentPage => currentPage >= totalPages ? totalPages : currentPage + 1)
+    }
+  }, [data])
+
+  const handleGoToLastPage = useCallback(() => {
+    if (data) {
+      setPage(Math.ceil(data.total_items_count / ITEMS_PER_PAGE))
+    }
+  }, [data])
+
+  useEffect(() => {
+    eventUtils.subscribe(companyPatientsEventNames.RESET_LIST, () => {
+      setPage(1)
+
+      queryClient.resetQueries({
+        queryKey: ['company-patients', selectedCompany?.id]
+      })
+    })
+
+    return () => eventUtils.unsubscribe(companyPatientsEventNames.RESET_LIST, () => { })
+  }, [queryClient, selectedCompany?.id])
+
+  useEffect(() => {
+    eventUtils.subscribe(companyPatientsEventNames.RESET_PAGE, () => refetch())
+
+    return () => eventUtils.unsubscribe(companyPatientsEventNames.RESET_PAGE, () => { })
+  }, [refetch])
+
+  if (isLoading) {
+    return <Loading itemsPerPage={ITEMS_PER_PAGE} />
+  }
+
+  if (error) {
+    return <Failure error={error} onTryAgain={refetch} />
+  }
+
+  const patients = data?.items ?? [];
+  const totalItems = data?.total_items_count ?? 0;
+
+  return <PatientsTable
+    isFetching={isFetching}
+    itemsPerPage={ITEMS_PER_PAGE}
+    patients={patients}
+    page={page}
+    totalItems={totalItems}
+    onFirstPage={handleGoToFirstPage}
+    onPreviousPage={handleGoToPreviousPage}
+    onNextPage={handleGoToNextPage}
+    onLastPage={handleGoToLastPage}
+  />
+}

@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { BaseLayout } from '@/layouts/base'
 import { PrivateLayout } from '@/layouts/private'
 import { TeamLayout } from '@/layouts/team'
+import { PatientsLayout } from '@/layouts/patients'
 // import { SettingsLayout } from '@/layouts/Settings'
 
 import { SuspenseRouterOutlet } from '@/components/suspense-router-outlet'
@@ -21,6 +22,7 @@ const OnboardingPage = lazy(() => import('@/pages/private/onboarding'))
 const HomePage = lazy(() => import('@/pages/private/home'))
 const TeamPage = lazy(() => import('@/pages/private/team'))
 const CompanyInvitesPage = lazy(() => import('@/pages/private/invites'))
+const PatientsPage = lazy(() => import('@/pages/private/patients'))
 // const PatientsPage = lazy(() => import('@/pages/Patients'))
 // const PatientPage = lazy(() => import('@/pages/Patient'))
 // const AppearancePage = lazy(() => import('@/pages/Settings/Appearance'))
@@ -47,6 +49,10 @@ export function Router() {
               <Route element={<CompanyRoleNavGuard allowedRoles={['owner', 'manager']} />}>
                 <Route path="invites" element={<CompanyInvitesPage />} />
               </Route>
+            </Route>
+
+            <Route path="patients" element={<PatientsLayout />}>
+              <Route index element={<PatientsPage />} />
             </Route>
           </Route>
         </Route>

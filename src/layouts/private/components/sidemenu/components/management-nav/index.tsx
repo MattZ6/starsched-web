@@ -34,9 +34,14 @@ export function ManagementNav() {
           </SidebarMenuButton>
         </SidebarMenuItem>
         <SidebarMenuItem>
-          <SidebarMenuButton disabled>
-            <Users />
-            <span>{t('patients.link.label')}</span>
+          <SidebarMenuButton asChild>
+            <NavLink
+              to={`/${companySlug}/patients`}
+              className="text-muted-foreground aria-[current='page']:text-foreground"
+            >
+              <Users />
+              <span>{t('patients.link.label')}</span>
+            </NavLink>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

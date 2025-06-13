@@ -11,6 +11,13 @@
       "try-again": {
         "label": "Tentar novamente"
       }
+    },
+    "patients": {
+      "count-label": "{{count}} de {{total}} pacientes",
+      "limit-exceeded": "Limite de pacientes excedido",
+      "up-to_one": "Até {{count}} paciente.",
+      "up-to_other": "Até {{count}} pacientes.",
+      "no-limits": "Seu plano não possui limite de pacientes."
     }
   }
 }
